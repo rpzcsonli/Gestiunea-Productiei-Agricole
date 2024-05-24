@@ -1,0 +1,37 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddRasadViewModel;
+
+
+
+    <h1>Adaugare Rasaduri</h1>
+    <form method="post">
+        <div asp-controller="Rasaduri" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="Denumire">Denumire</label>
+            <input asp-for="Denumire" />
+            <span asp-validation-for="Denumire"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodPlanta">Planta</label>
+            <input asp-for="CodPlanta" />
+            <span asp-validation-for="CodPlanta"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DataSemanat">Data Semanat</label>
+            <input asp-for="DataSemanat" />
+            <span asp-validation-for="DataSemanat"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DataMaturitate">Data Maturitate</label>
+            <input asp-for="DataMaturitate" />
+            <span asp-validation-for="DataMaturitate"></span>
+            </div><div class="form-group">
+            <label asp-for="Cantitate">Numar Plante</label>
+            <input asp-for="Cantitate" />
+            <span asp-validation-for="Cantitate"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Rasad" />
+    </form>
+

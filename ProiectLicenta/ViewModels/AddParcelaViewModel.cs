@@ -15,7 +15,7 @@ namespace ProiectLicenta.ViewModels
         public string Tip { get; set; }
         [Required]
         public int Suprafata { get; set; }
-        [Required]
+        [ForeignKey("Rasaduri")]
         public int CodRasad { get; set; }
         [Required]
         public int NumarPlante { get; set; }

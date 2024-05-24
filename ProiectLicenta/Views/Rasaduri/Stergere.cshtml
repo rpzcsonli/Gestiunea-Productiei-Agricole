@@ -1,0 +1,16 @@
+﻿
+<h1>Sterge Rasaduri</h1>
+<form method="post">
+    @foreach (var evt in ViewBag.events)
+    {
+        <div class="form-group">
+            <label>
+                <span>@evt.Denumire</span>
+                <input type="checkbox" name="rasadId" value="@evt.CodRasad" />
+            </label>
+        </div>
+    }
+    <input type="submit" name="Stergere" class="btn btn-danger" />
+</form>
+
+

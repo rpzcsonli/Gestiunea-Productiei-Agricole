@@ -17,52 +17,51 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Angajat> angajat = context.Angajat.ToList();
-            return View(angajat);
+            List<Rasaduri> rasad = context.Rasad.ToList();
+            return View(rasad);
         }
 
         [HttpGet]
         public IActionResult Adaugare()
         {
-            AddAngajatViewModel addAngajatViewModel = new AddAngajatViewModel();
-            return View(addAngajatViewModel);
+            AddRasadViewModel addRasadViewModel = new AddRasadViewModel();
+            return View(addRasadViewModel);
         }
         [HttpPost]
-        public IActionResult Adaugare(AddAngajatViewModel addAngajatViewModel)
+        public IActionResult Adaugare(AddRasadViewModel addRasadViewModel)
         {
             if (ModelState.IsValid)
             {
-                Angajat newAngajat = new Angajat(
-                    addAngajatViewModel.CodAngajat,
-                    addAngajatViewModel.Nume,
-                    addAngajatViewModel.Prenume,
-                    addAngajatViewModel.Functie,
-                    addAngajatViewModel.Telefon,
-                    addAngajatViewModel.Email
+                Rasaduri newRasaduri = new Rasaduri(
+                    addRasadViewModel.CodRasad,
+                    addRasadViewModel.Denumire, 
+                    addRasadViewModel.CodPlanta,
+                    addRasadViewModel.DataSemanat,
+                    addRasadViewModel.DataMaturitate,
+                    addRasadViewModel.Cantitate
                 );
-
-                context.Angajat.Add(newAngajat);
+                context.Rasad.Add(newRasaduri);
                 context.SaveChanges();
-                return Redirect("/Angajati");
+                return Redirect("/Rasaduri");
             }
-            return View(addAngajatViewModel);
+            return View(addRasadViewModel);
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Angajat.ToList();
+            ViewBag.events = context.Rasad.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult Stergere(int[] angajatId)
+        public IActionResult Stergere(int[] rasadId)
         {
-            foreach (int Id in angajatId)
+            foreach (int Id in rasadId)
             {
-                Angajat angajat = context.Angajat.Find(Id);
-                context.Angajat.Remove(angajat);
+                Rasaduri rasad = context.Rasad.Find(Id);
+                context.Rasad.Remove(rasad);
 
             }
             context.SaveChanges();
-            return Redirect("/Angajati");
+            return Redirect("/Rasaduri");
         }
     }
 }
