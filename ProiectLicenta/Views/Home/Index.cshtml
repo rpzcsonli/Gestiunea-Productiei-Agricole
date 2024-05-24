@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Acasa";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>
+        
+            <a class="list-group-item" asp-controller="Angajati">Angajati</a>
+        <a class="list-group-item" asp-controller="Parcele">Parcele</a>
+    </div>
+}
+else
+{
+<div class="text-center">
+    <h1 class="display-4">Bine ai venit!</h1>
+    <p>Aceasta Platforma este doar pentru angajatii MilianaAgro</p>
+</div>
+}

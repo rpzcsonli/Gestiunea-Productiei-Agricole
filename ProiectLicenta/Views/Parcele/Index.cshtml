@@ -1,0 +1,68 @@
+﻿@using ProiectLicenta.Models
+
+@model List<Parcela>
+
+
+
+<h1> Angajati </h1>
+
+<p>
+    <a asp-controller="Parcele" asp-action="Adaugare"> Adauga Parcela</a>
+</p>
+<p>
+    <a asp-controller="Parcele" asp-action="Stergere"> Sterge Parcela</a>
+</p>
+
+@if (Model.Count == 0)
+{
+    <p> Nu exista parcele!</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Cod Parcela
+            </th>
+            <th>
+                Locatie
+            </th>
+            <th>
+                Tipul
+            </th>
+            <th>
+                Suprafata
+            </th>
+            <th>
+                Planta
+            </th>
+            <th>
+                Numar de Plante
+            </th>
+        </tr>
+        @foreach (var var in Model)
+        {
+            <tr>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.Locatie
+                </td>
+                <td>
+                    @var.Tip
+                </td>
+                <td>
+                    @var.Suprafata
+                </td>
+                <td>
+                   @var.CodRasad
+                </td>
+                <td>
+                    @var.NumarPlante
+                </td>
+            </tr>
+        }
+
+    </table>
+}

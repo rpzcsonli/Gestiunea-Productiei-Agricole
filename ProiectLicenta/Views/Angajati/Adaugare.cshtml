@@ -1,0 +1,37 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddAngajatViewModel;
+
+
+
+    <h1>Adaugare Angajati</h1>
+    <form method="post">
+        <div asp-controller="Angajati" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+                <label asp-for="Nume">Nume</label>
+                <input asp-for="Nume" />
+                <span asp-validation-for="Nume"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prenume">Prenume</label>
+                <input asp-for="Prenume" />
+                <span asp-validation-for="Prenume"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Functie">Functie</label>
+                <input asp-for="Functie" />
+                <span asp-validation-for="Functie"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon">Telefon</label>
+                <input asp-for="Telefon" />
+                <span asp-validation-for="Telefon"></span>
+            </div><div class="form-group">
+                <label asp-for="Email">Adresa Email</label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Angajat" />
+    </form>
+

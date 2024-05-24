@@ -1,0 +1,37 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddParcelaViewModel;
+
+
+
+    <h1>Adaugare Parcele</h1>
+    <form method="post">
+        <div asp-controller="Parcele" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="Locatie">Locatie</label>
+            <input asp-for="Locatie" />
+            <span asp-validation-for="Locatie"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Tip">Tip</label>
+            <input asp-for="Tip" />
+            <span asp-validation-for="Tip"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Suprafata">Suprafata</label>
+            <input asp-for="Suprafata" />
+            <span asp-validation-for="Suprafata"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodRasad">Planta</label>
+            <input asp-for="CodRasad" />
+            <span asp-validation-for="CodRasad"></span>
+            </div><div class="form-group">
+            <label asp-for="NumarPlante">Numar Plante</label>
+            <input asp-for="NumarPlante" />
+            <span asp-validation-for="NumarPlante"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Parcela" />
+    </form>
+

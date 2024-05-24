@@ -1,0 +1,16 @@
+﻿
+<h1>Sterge Parcele</h1>
+<form method="post">
+    @foreach (var evt in ViewBag.events)
+    {
+        <div class="form-group">
+            <label>
+                <span>@evt.Locatie</span>
+                <input type="checkbox" name="parcelaId" value="@evt.CodParcela" />
+            </label>
+        </div>
+    }
+    <input type="submit" name="Stergere" class="btn btn-danger" />
+</form>
+
+
