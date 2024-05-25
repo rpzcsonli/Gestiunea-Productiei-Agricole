@@ -2,9 +2,11 @@
 
 @model List<Parcela>
 
+@{
+    ViewData["Title"] = "Parcele";
+}
 
-
-<h1> Angajati </h1>
+<h1> Parcele </h1>
 
 <p>
     <a asp-controller="Parcele" asp-action="Adaugare"> Adauga Parcela</a>
@@ -19,7 +21,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table table-striped">
         <tr>
             <th>
                 Cod Parcela

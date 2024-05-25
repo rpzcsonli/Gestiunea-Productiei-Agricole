@@ -1,0 +1,25 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddDaunatorViewModel;
+@{
+    ViewData["Title"] = "Adaugare Daunatori";
+}
+
+
+    <h1>Adaugare Daunatori</h1>
+    <form method="post">
+        <div asp-controller="Daunatori" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="Denumire">Denumire</label>
+            <input asp-for="Denumire" />
+            <span asp-validation-for="Denumire"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodTratament">CodTratament</label>
+            <select asp-for="CodTratament" asp-items="ViewBag.codTratament"></select>
+            <span asp-validation-for="CodTratament"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Daunator" />
+    </form>
+

@@ -1,7 +1,9 @@
 ﻿@using ProiectLicenta.ViewModels;
 @model AddRasadViewModel;
 
-
+@{
+    ViewData["Title"] = "Adaugare Rasaduri";
+}
 
     <h1>Adaugare Rasaduri</h1>
     <form method="post">
@@ -13,7 +15,7 @@
             </div>
             <div class="form-group">
             <label asp-for="CodPlanta">Planta</label>
-            <input asp-for="CodPlanta" />
+            <select asp-for="CodPlanta" asp-items="ViewBag.codPlanta"></select>
             <span asp-validation-for="CodPlanta"></span>
             </div>
             <div class="form-group">

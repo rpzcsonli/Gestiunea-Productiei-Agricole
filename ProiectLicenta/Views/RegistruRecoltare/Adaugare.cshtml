@@ -1,0 +1,35 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddRegistruRecoltareViewModel;
+
+@{
+    ViewData["Title"] = "Adaugare Recoltare";
+}
+
+    <h1>Adaugare Recoltare</h1>
+    <form method="post">
+    <div asp-controller="RegistruRecoltare" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="CodParcela">Parcela</label>
+            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
+            <span asp-validation-for="CodParcela"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodAngajat">Angajat</label>
+            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
+            <span asp-validation-for="CodAngajat"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CantitateRecoltata">Cantitate Recoltata</label>
+            <input asp-for="CantitateRecoltata" />
+            <span asp-validation-for="CantitateRecoltata"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DataRecoltare">Data Recoltare</label>
+            <input asp-for="DataRecoltare" />
+            <span asp-validation-for="DataRecoltare"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Recoltare" />
+    </form>
+

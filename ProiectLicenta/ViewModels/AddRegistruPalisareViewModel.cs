@@ -1,0 +1,20 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace ProiectLicenta.ViewModels
+{
+    public class AddRegistruPalisareViewModel
+    {
+        [Key]
+        public int CodPalisare { get; set; }
+        [ForeignKey("Parcela")]
+        public int CodParcela { get; set; }
+        [Required(ErrorMessage ="Numarul de plante este obligatoriu!")]
+        [Range(1, int.MaxValue, ErrorMessage = "Introduceti o valoare valida!")]
+        public int NumarPlante { get; set; }
+        [ForeignKey("Angajat")]
+        public int CodAngajat { get; set; }
+        [Required]
+        public DateTime DataPalisare { get; set; }
+    }
+}

@@ -1,0 +1,39 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddRegistruTratamenteViewModel;
+@{
+    ViewData["Title"] = "Adaugare Tratament";
+}
+
+
+    <h1>Adaugare Tratament Aplicat</h1>
+    <form method="post">
+    <div asp-controller="RegistruTratamente" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="CodParcela">Parcela</label>
+            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
+            <span asp-validation-for="CodParcela"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodDaunator">Daunator</label>
+            <select asp-for="CodDaunator" asp-items="ViewBag.codDaunator"></select>
+            <span asp-validation-for="CodDaunator"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Suprafata">Suprafata</label>
+            <input asp-for="Suprafata" />
+            <span asp-validation-for="Suprafata"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodAngajat">Angajat</label>
+            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
+            <span asp-validation-for="CodAngajat"></span>
+            </div><div class="form-group">
+            <label asp-for="DataAplicare">Data Aplicare</label>
+            <input asp-for="DataAplicare" />
+            <span asp-validation-for="DataAplicare"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Tratament Aplicat" />
+    </form>
+

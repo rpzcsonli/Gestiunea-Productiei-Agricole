@@ -7,8 +7,8 @@ namespace ProiectLicenta.ViewModels
     {
         [Key]
         public int CodRasad { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Denumirea este obligatorie!")]
+        [MaxLength(50, ErrorMessage = "Lungimea maxima este de 50 caractere!")]
         public string Denumire { get; set; }
         [ForeignKey("Plante")]
         public int CodPlanta { get; set; }
@@ -16,7 +16,8 @@ namespace ProiectLicenta.ViewModels
         public DateTime DataSemanat { get; set; }
         [Required]
         public DateTime DataMaturitate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Cantitatea este obligatorie!")]
+        [Range(1, int.MaxValue, ErrorMessage = "Introduceti o valoare valida!")]
         public int Cantitate { get; set; }
     }
 }

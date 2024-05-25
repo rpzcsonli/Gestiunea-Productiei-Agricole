@@ -1,5 +1,7 @@
 ﻿@using ProiectLicenta.Models
-
+@{
+    ViewData["Title"] = "Plante";
+}
 @model List<Plante>
 <h1> Plante </h1>
 <p>
@@ -15,7 +17,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table table-striped">
         <tr>
             <th>
                 Cod Planta

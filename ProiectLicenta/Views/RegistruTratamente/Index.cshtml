@@ -1,0 +1,70 @@
+﻿@using ProiectLicenta.Models
+
+@model List<RegistruTratamente>
+@{
+    ViewData["Title"] = "Registru Tratamente";
+}
+
+
+<h1> Registru Tratamente </h1>
+
+<p>
+    <a asp-controller="RegistruTratamente" asp-action="Adaugare"> Adauga Tratament Aplicat</a>
+</p>
+<p>
+    <a asp-controller="RegistruTratamente" asp-action="Stergere"> Sterge Tratament Aplicat</a>
+</p>
+
+@if (Model.Count == 0)
+{
+    <p> Nu exista tratamente aplicate in registru!</p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Cod Aplicare
+            </th>
+            <th>
+                Parcela
+            </th>
+            <th>
+                Daunator
+            </th>
+            <th>
+                Suprafata
+            </th>
+            <th>
+                Angajat
+            </th>
+            <th>
+                Data Aplicare
+            </th>
+        </tr>
+        @foreach (var var in Model)
+        {
+            <tr>
+                <td>
+                    @var.CodTratamentAplicat
+                </td>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.CodDaunator
+                </td>
+                <td>
+                    @var.Suprafata
+                </td>
+                <td>
+                    @var.CodAngajat
+                </td>
+                <td>
+                    @var.DataAplicare
+                </td>
+            </tr>
+        }
+
+    </table>
+}

@@ -1,0 +1,35 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddRegistruIrigareViewModel;
+@{
+    ViewData["Title"] = "Adaugare Irigare";
+}
+
+
+    <h1>Adaugare Irigare</h1>
+    <form method="post">
+    <div asp-controller="RegistruIrigare" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="CodParcela">Cod Parcela</label>
+            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
+            <span asp-validation-for="CodParcela"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DurataIrigare">Durata Irigare</label>
+            <input asp-for="DurataIrigare" />
+            <span asp-validation-for="DurataIrigare"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CodAngajat">Angajat</label>
+            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
+            <span asp-validation-for="CodAngajat"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DataIrigare">Data Irigare</label>
+            <input asp-for="DataIrigare" />
+            <span asp-validation-for="DataIrigare"></span>
+            </div>
+        </div>
+
+        <input type="submit" value="Adaugare Irigare" />
+    </form>
+

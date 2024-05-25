@@ -1,0 +1,64 @@
+﻿@using ProiectLicenta.Models
+
+@model List<RegistruFertilizare>
+
+@{
+    ViewData["Title"] = "Registru Fertilizare";
+}
+
+<h1> Registru Fertilizare </h1>
+
+<p>
+    <a asp-controller="RegistruFertilizare" asp-action="Adaugare"> Adauga Fertilizare</a>
+</p>
+<p>
+    <a asp-controller="RegistruFertilizare" asp-action="Stergere"> Sterge Fertilizare</a>
+</p>
+
+@if (Model.Count == 0)
+{
+    <p> Nu exista fertilizari in registru!</p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Cod Fertilizare
+            </th>
+            <th>
+                Parcela
+            </th>
+            <th>
+                Suprafata
+            </th>
+            <th>
+                Angajat
+            </th>
+            <th>
+                Data Fertilizare
+            </th>
+        </tr>
+        @foreach (var var in Model)
+        {
+            <tr>
+                <td>
+                    @var.CodFertilizare
+                </td>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.Suprafata
+                </td>
+                <td>
+                    @var.CodAngajat
+                </td>
+                <td>
+                    @var.DataFertilizare
+                </td>
+            </tr>
+        }
+
+    </table>
+}

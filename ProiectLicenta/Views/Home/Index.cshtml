@@ -6,12 +6,20 @@
 }
 @if (SignInManager.IsSignedIn(User))
 {
-    <div>
+    <div class="bd-example ">
         
-        <a class="list-group-item" asp-controller="Angajati">Angajati</a>
-        <a class="list-group-item" asp-controller="Parcele">Parcele</a>
-        <a class="list-group-item" asp-controller="Rasaduri">Rasaduri</a>
-        <a class="list-group-item" asp-controller="Plante">Plante</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati">Angajati</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele">Parcele</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri">Rasaduri</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Plante">Plante</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Daunatori">Daunatori</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Tratamente">Tratamente</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruCopilire">Registru Copilire</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruFertilizare">Registru Fertilizare</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruIrigare">Registru Irigare</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruPalisare">Registru Palisare</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruRecoltare">Registru Recoltare</a>
+        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruTratamente">Registru Tratamente</a>
     </div>
 }
 else

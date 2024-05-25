@@ -1,0 +1,27 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddTratamentViewModel;
+@{
+    ViewData["Title"] = "Adaugare Tratamente";
+}
+    <h1>Adaugare Tratamente</h1>
+    <form method="post">
+        <div asp-controller="Tratamente" asp-action="Adaugare" class="form-group">
+            <div class="form-group">
+            <label asp-for="Denumire">Denumire</label>
+            <input asp-for="Denumire" />
+            <span asp-validation-for="Denumire"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Cantitate">Cantitate Administrare</label>
+            <input asp-for="Cantitate" />
+            <span asp-validation-for="Cantitate"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Perioada">Perioada Administrare</label>
+            <input asp-for="Perioada" />
+            <span asp-validation-for="Perioada"></span>
+            </div>
+        </div>
+        <input type="submit" value="Adaugare Tratament" />
+    </form>
+

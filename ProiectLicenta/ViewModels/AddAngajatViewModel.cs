@@ -18,7 +18,7 @@ namespace ProiectLicenta.ViewModels
             [MaxLength(50, ErrorMessage = "Lungimea maxima este de 50 caractere!")]
             public string Functie { get; set; }
             [Required(ErrorMessage = "Numarul de telefon este obligatoriu!")]
-            [MaxLength(10, ErrorMessage = "Lungimea maxima este de 10 caractere!")]
+            [MaxLength(10, ErrorMessage = "Lungimea maxima este de 10 cifre!")]
             public string Telefon { get; set; }
             [Required(ErrorMessage = "Email-ul este obligatoriu!")]
             [EmailAddress]

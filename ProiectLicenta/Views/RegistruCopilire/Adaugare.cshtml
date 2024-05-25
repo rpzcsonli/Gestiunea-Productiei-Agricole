@@ -1,0 +1,34 @@
+﻿@using ProiectLicenta.ViewModels;
+@model AddRegistruCopilireViewModel;
+
+@{
+    ViewData["Title"] = "Adaugare Copilire";
+}
+
+<h1>Adaugare Copilire</h1>
+<form method="post">
+    <div asp-controller="RegistruCopilire" asp-action="Adaugare" class="form-group">
+        <div class="form-group">
+            <label asp-for="CodParcela">Cod Parcela</label>
+            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
+            <span asp-validation-for="CodParcela"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumarPlante">Numar Plante</label>
+            <input asp-for="NumarPlante" />
+            <span asp-validation-for="NumarPlante"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CodAngajat">Cod Angajat</label>
+            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
+            <span asp-validation-for="CodAngajat"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DataCopilire">Data Copilire</label>
+            <input asp-for="DataCopilire" />
+            <span asp-validation-for="DataCopilire"></span>
+        </div>
+
+        <input type="submit" value="Adaugare Copilire" />
+    </div>
+</form>

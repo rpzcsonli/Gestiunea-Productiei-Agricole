@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Stergere Daunatori";
+}
+<h1>Sterge Daunator</h1>
+<form method="post">
+    @foreach (var evt in ViewBag.events)
+    {
+        <div class="form-group">
+            <label>
+                <span>@evt.Denumire</span>
+                <input type="checkbox" name="daunatorId" value="@evt.CodDaunator" />
+            </label>
+        </div>
+    }
+    <input type="submit" name="Stergere" class="btn btn-danger" />
+</form>
+
+

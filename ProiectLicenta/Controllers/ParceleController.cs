@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -21,11 +22,23 @@ namespace ProiectLicenta.Controllers
             List<Parcela> parcela = context.Parcela.ToList();
             return View(parcela);
         }
+        public void CheiExterne(AddParcelaViewModel intrare)
+        {
+            var codRasad = context.Rasad.OrderBy(p => p.Denumire).ToList();
+            ViewBag.codRasad = codRasad.Select(p => new SelectListItem
+            {
+                Value = p.CodRasad.ToString(),
+                Text = p.Denumire,
+                Selected = p.CodRasad == intrare.CodRasad,
+            });
+            
 
+        }
         [HttpGet]
         public IActionResult Adaugare()
         {
             AddParcelaViewModel addParcelaViewModel = new AddParcelaViewModel();
+            CheiExterne(addParcelaViewModel);
             return View(addParcelaViewModel);
         }
         [HttpPost]

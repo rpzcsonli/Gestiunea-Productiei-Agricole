@@ -1,37 +1,47 @@
 ﻿@using ProiectLicenta.ViewModels;
 @model AddAngajatViewModel;
+@{
+    ViewData["Title"] = "Adaugare Angajati";
+}
 
 
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Angajati</h1>
+<div>
 
-    <h1>Adaugare Angajati</h1>
-    <form method="post">
-        <div asp-controller="Angajati" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-                <label asp-for="Nume">Nume</label>
-                <input asp-for="Nume" />
+    <div asp-controller="Angajati" asp-action="Adaugare" class="bd-example">
+        <form method="post">
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Nume" asp-for="Nume" />
+                <label for="floatingInput" asp-for="Nume">Nume</label>
                 <span asp-validation-for="Nume"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Prenume">Prenume</label>
-                <input asp-for="Prenume" />
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Prenume" asp-for="Prenume" />
+                <label for="floatingInput" asp-for="Prenume">Prenume</label>
                 <span asp-validation-for="Prenume"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Functie">Functie</label>
-                <input asp-for="Functie" />
+            <div class=" form-floating mb-3">
+
+                <input id="floatingInput" class="form-control" placeholder="Functie" asp-for="Functie" />
+                <label for="floatingInput" asp-for="Functie">Functie</label>
                 <span asp-validation-for="Functie"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Telefon">Telefon</label>
-                <input asp-for="Telefon" />
+            <div class=" form-floating mb-3">
+
+                <input id="floatingInput" class="form-control" placeholder="Telefon" asp-for="Telefon" />
+                <label for="floatingInput" asp-for="Telefon">Telefon</label>
                 <span asp-validation-for="Telefon"></span>
-            </div><div class="form-group">
-                <label asp-for="Email">Adresa Email</label>
-                <input asp-for="Email" />
+            </div>
+            <div class=" form-floating mb-3">
+
+                <input id="floatingInput" class="form-control" placeholder="Adresa de Email" asp-for="Email" />
+                <label for="floatingInput" asp-for="Email">Adresa de Email</label>
                 <span asp-validation-for="Email"></span>
             </div>
-        </div>
+            <input class="btn btn-primary" type="submit" value="Adaugare Angajat" />
+        </form>
+    </div>
 
-        <input type="submit" value="Adaugare Angajat" />
-    </form>
 
+
+</div>

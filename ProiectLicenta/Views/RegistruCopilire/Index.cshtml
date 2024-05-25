@@ -1,0 +1,64 @@
+﻿@using ProiectLicenta.Models
+
+@model List<RegistruCopilire>
+
+    @{
+    ViewData["Title"] = "Registru Copilire";
+}
+
+<h1> Registru Copilire </h1>
+
+<p>
+    <a asp-controller="RegistruCopilire" asp-action="Adaugare"> Adauga Actiune</a>
+</p>
+<p>
+    <a asp-controller="RegistruCopilire" asp-action="Stergere"> Sterge Actiune</a>
+</p>
+
+@if (Model.Count == 0)
+{
+    <p> Nu exista copiliri in registru!</p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Cod Copilire
+            </th>
+            <th>
+                Parcela
+            </th>
+            <th>
+                Numar Plante
+            </th>
+            <th>
+                Angajat
+            </th>
+            <th>
+                Data Copilire
+            </th>
+        </tr>
+        @foreach (var var in Model)
+        {
+            <tr>
+                <td>
+                    @var.CodCopilire
+                </td>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.NumarPlante
+                </td>
+                <td>
+                    @var.CodAngajat
+                </td>
+                <td>
+                    @var.DataCopilire
+                </td>
+            </tr>
+        }
+
+    </table>
+}
