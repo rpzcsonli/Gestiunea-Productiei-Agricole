@@ -44,11 +44,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Tratamente");
             }
-            return View(addTratamentViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Tratament.ToList();
+            ViewBag.stergere = context.Tratament.ToList();
             return View();
         }
         [HttpPost]

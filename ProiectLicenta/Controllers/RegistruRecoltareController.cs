@@ -66,11 +66,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/RegistruRecoltare");
             }
-            return View(addRegistruRecoltareViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.RegistruRecoltare.ToList();
+            ViewBag.stergere = context.RegistruRecoltare.ToList();
             return View();
         }
         [HttpPost]

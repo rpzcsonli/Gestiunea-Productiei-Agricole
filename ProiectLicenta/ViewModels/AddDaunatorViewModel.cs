@@ -11,6 +11,7 @@ namespace ProiectLicenta.ViewModels
         [MaxLength(50,ErrorMessage ="Lungimea maxima este de 50 caractere!")]
         public string Denumire { get; set; }
         [ForeignKey("Tratament")]
+        [Range(1, int.MaxValue, ErrorMessage = "Alegeti un Tratament!")]
         public int CodTratament { get; set; }
     }
 }

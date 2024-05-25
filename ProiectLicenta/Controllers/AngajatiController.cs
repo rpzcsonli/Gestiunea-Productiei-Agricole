@@ -47,11 +47,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Angajati");
             }
-            return View(addAngajatViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Angajat.ToList();
+            ViewBag.stergere = context.Angajat.ToList();
             return View();
         }
         [HttpPost]

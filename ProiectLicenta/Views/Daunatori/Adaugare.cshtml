@@ -3,23 +3,26 @@
 @{
     ViewData["Title"] = "Adaugare Daunatori";
 }
-
-
-    <h1>Adaugare Daunatori</h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Daunatori</h1>
+<div>
+<div asp-controller="Daunatori" asp-action="Adaugare" class="bd-example">
+    
     <form method="post">
-        <div asp-controller="Daunatori" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="Denumire">Denumire</label>
-            <input asp-for="Denumire" />
+
+        <div class=" form-floating mb-3">
+            <input id="floatingInput" class="form-control" placeholder="Denumire" asp-for="Denumire" />
+            <label for="floatingInput" asp-for="Denumire">Denumire</label>
             <span asp-validation-for="Denumire"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="CodTratament">CodTratament</label>
-            <select asp-for="CodTratament" asp-items="ViewBag.codTratament"></select>
+        <div class="">
+          
+            <select class="form-select form-control-lg" asp-for="CodTratament" asp-items="ViewBag.codTratament">
+                <option value="0" hidden>Alege Tratament</option>
+            </select>
             <span asp-validation-for="CodTratament"></span>
             </div>
-        </div>
-
-        <input type="submit" value="Adaugare Daunator" />
+            </br>
+        <input class="btn btn-primary" type="submit" value="Adaugare Daunator" />
     </form>
-
+    </div>
+</div>

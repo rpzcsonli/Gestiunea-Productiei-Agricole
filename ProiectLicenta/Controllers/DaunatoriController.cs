@@ -54,11 +54,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Daunatori");
             }
-            return View(addDaunatorViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Daunatori.ToList();
+            ViewBag.stergere = context.Daunatori.ToList();
             return View();
         }
         [HttpPost]

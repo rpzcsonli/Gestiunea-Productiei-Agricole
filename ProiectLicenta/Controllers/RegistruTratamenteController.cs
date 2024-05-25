@@ -73,11 +73,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/RegistruTratamente");
             }
-            return View(addRegistruTratamenteViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.RegistruTratamente.ToList();
+            ViewBag.stergere = context.RegistruTratamente.ToList();
             return View();
         }
         [HttpPost]

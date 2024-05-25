@@ -59,11 +59,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Parcele");
             }
-            return View(addParcelaViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Parcela.ToList();
+            ViewBag.stergere = context.Parcela.ToList();
             return View();
         }
         [HttpPost]

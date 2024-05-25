@@ -17,6 +17,7 @@ namespace ProiectLicenta.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "Introduceti o valoare valida!")]
         public int Suprafata { get; set; }
         [ForeignKey("Rasaduri")]
+        [Range(1, int.MaxValue, ErrorMessage = "Alegeti un Rasad!")]
         public int CodRasad { get; set; }
         [Required(ErrorMessage ="Numarul de plante este obligatoriu!")]
         [Range(1, int.MaxValue, ErrorMessage = "Introduceti o valoare valida!")]

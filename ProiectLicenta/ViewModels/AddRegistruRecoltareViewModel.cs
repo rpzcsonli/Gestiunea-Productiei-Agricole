@@ -8,8 +8,10 @@ namespace ProiectLicenta.ViewModels
         [Key]
         public int CodRecoltare { get; set; }
         [ForeignKey("Parcela")]
+        [Range(1, int.MaxValue, ErrorMessage = "Alegeti o Parcela!")]
         public int CodParcela { get; set; }
         [ForeignKey("Angajat")]
+        [Range(1, int.MaxValue, ErrorMessage = "Alegeti un Angajat!")]
         public int CodAngajat { get; set; }
         [Required(ErrorMessage = "Cantitatea recoltata este obligatorie!")]
         [Range(1, int.MaxValue, ErrorMessage = "Introduceti o valoare valida!")]

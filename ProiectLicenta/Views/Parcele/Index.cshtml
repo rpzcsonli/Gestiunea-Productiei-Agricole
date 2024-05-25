@@ -6,14 +6,15 @@
     ViewData["Title"] = "Parcele";
 }
 
-<h1> Parcele </h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center"> Parcele </h1>
 
-<p>
-    <a asp-controller="Parcele" asp-action="Adaugare"> Adauga Parcela</a>
-</p>
-<p>
-    <a asp-controller="Parcele" asp-action="Stergere"> Sterge Parcela</a>
-</p>
+<table>
+<tr>
+    <th> <a class="btn btn-primary" asp-controller="Parcele" asp-action="Adaugare"> Adauga Parcela</a></th>
+    <th>    <a class="btn btn-primary" asp-controller="Parcele" asp-action="Stergere"> Sterge Parcela</a></th>
+</tr>
+    </table>
+    </br>
 
 @if (Model.Count == 0)
 {
@@ -21,7 +22,7 @@
 }
 else
 {
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
         <tr>
             <th>
                 Cod Parcela

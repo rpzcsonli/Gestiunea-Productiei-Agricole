@@ -5,35 +5,44 @@
     ViewData["Title"] = "Adaugare Parcele";
 }
 
-    <h1>Adaugare Parcele</h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Parcele</h1>
+<div>
+    <div asp-controller="Parcele" asp-action="Adaugare" class="bd-example">
     <form method="post">
-        <div asp-controller="Parcele" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="Locatie">Locatie</label>
-            <input asp-for="Locatie" />
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Locatie" asp-for="Locatie" />
+                <label for="floatingInput" asp-for="Locatie">Locatie</label>
+           
             <span asp-validation-for="Locatie"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="Tip">Tip</label>
-            <input asp-for="Tip" />
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Tip" asp-for="Tip" />
+                <label for="floatingInput" asp-for="Tip">Tip</label>
+            
             <span asp-validation-for="Tip"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="Suprafata">Suprafata</label>
-            <input asp-for="Suprafata" />
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Suprafata (mp)" asp-for="Suprafata" />
+                <label for="floatingInput" asp-for="Suprafata">Suprafata (mp)</label>
+           
             <span asp-validation-for="Suprafata"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CodRasad">Planta</label>
-            <select asp-for="CodRasad" asp-items="ViewBag.codRasad"></select>
+                
+                <select class="form-select form-control-lg" asp-for="CodRasad" asp-items="ViewBag.codRasad">
+                    <option value="0" hidden>Alege Rasad</option>
+                </select>
             <span asp-validation-for="CodRasad"></span>
-            </div><div class="form-group">
-            <label asp-for="NumarPlante">Numar Plante</label>
-            <input asp-for="NumarPlante" />
+            </br>
+            </div>
+            <div class=" form-floating mb-3">
+                <input  id="floatingInput" class="form-control" placeholder="Numar Plante" asp-for="NumarPlante" />
+                <label for="floatingInput" asp-for="NumarPlante">Numar Plante</label>
+           
             <span asp-validation-for="NumarPlante"></span>
             </div>
-        </div>
-
-        <input type="submit" value="Adaugare Parcela" />
+            </br>
+            <input class="btn btn-primary" type="submit" value="Adaugare Parcela" />
     </form>
-
+    </div>
+</div>

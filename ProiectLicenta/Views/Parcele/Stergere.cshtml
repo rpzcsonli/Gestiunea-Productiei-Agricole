@@ -1,18 +1,58 @@
 ﻿@{
     ViewData["Title"] = "Stergere Parcele";
 }
-<h1>Sterge Parcele</h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Sterge Parcele</h1>
 <form method="post">
-    @foreach (var evt in ViewBag.events)
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Selectie
+            </th>
+            <th>
+                Cod Parcela
+            </th>
+            <th>
+                Locatie
+            </th>
+            <th>
+                Tipul
+            </th>
+            <th>
+                Suprafata
+            </th>
+            <th>
+                Planta
+            </th>
+            <th>
+                Numar de Plante
+            </th>
+        </tr>
+    @foreach (var var in ViewBag.stergere)
     {
-        <div class="form-group">
-            <label>
-                <span>@evt.Locatie</span>
-                <input type="checkbox" name="parcelaId" value="@evt.CodParcela" />
-            </label>
-        </div>
+            <tr>
+                <td><input type="checkbox" name="parcelaId" value="@var.CodParcela" /></td>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.Locatie
+                </td>
+                <td>
+                    @var.Tip
+                </td>
+                <td>
+                    @var.Suprafata
+                </td>
+                <td>
+                    @var.CodRasad
+                </td>
+                <td>
+                    @var.NumarPlante
+                </td>
+            </tr>
     }
-    <input type="submit" name="Stergere" class="btn btn-danger" />
+    </table>
+    <input type="submit" value="Stergere" name="Stergere" class="btn btn-danger" />
 </form>
 
 

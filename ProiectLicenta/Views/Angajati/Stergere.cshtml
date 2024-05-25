@@ -27,7 +27,7 @@
                 Email
             </th>
         </tr>
-    @foreach (var evt in ViewBag.events)
+    @foreach (var evt in ViewBag.stergere)
         {
             <tr>
                 <td><input type="checkbox" name="angajatId" value="@evt.CodAngajat" /></td>
@@ -53,6 +53,7 @@
            
         }
     </table>
+  
     <input type="submit" value="Stergere" name="Stergere" class="btn btn-danger" />
 </form>
 

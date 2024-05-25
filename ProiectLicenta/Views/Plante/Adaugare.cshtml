@@ -5,21 +5,26 @@
     ViewData["Title"] = "Adaugare Plante";
 }
 
-    <h1>Adaugare Plante</h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Plante</h1>
+<div>
+    <div asp-controller="Plante" asp-action="Adaugare" class="bd-example">
     <form method="post">
-        <div asp-controller="Plante" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="Nume">Nume</label>
-            <input asp-for="Nume" />
+       
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Nume" asp-for="Nume" />
+                <label for="floatingInput" asp-for="Nume">Nume</label>
             <span asp-validation-for="Nume"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="Descriere">Descriere</label>
-            <input asp-for="Descriere" />
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Descriere" asp-for="Descriere" />
+                <label for="floatingInput" asp-for="Descriere">Descriere</label>
+            
             <span asp-validation-for="Descriere"></span>
             </div>
-        </div>
 
-        <input type="submit" value="Adaugare Planta" />
+
+            <input class="btn btn-primary" type="submit" value="Adaugare Planta" />
     </form>
 
+    </div>
+        </div>

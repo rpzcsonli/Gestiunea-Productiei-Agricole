@@ -64,11 +64,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/RegistruPalisare");
             }
-            return View(addRegistruPalisareViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.RegistruPalisare.ToList();
+            ViewBag.stergere = context.RegistruPalisare.ToList();
             return View();
         }
         [HttpPost]

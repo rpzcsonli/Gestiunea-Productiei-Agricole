@@ -41,11 +41,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Plante");
             }
-            return View(addPlantaViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Plante.ToList();
+            ViewBag.stergere = context.Plante.ToList();
             return View();
         }
         [HttpPost]

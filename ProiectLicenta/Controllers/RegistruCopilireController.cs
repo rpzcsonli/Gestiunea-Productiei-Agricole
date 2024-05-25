@@ -68,11 +68,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/RegistruCopilire");
             }
-            return View(addRegistruCopilireViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.RegistruCopilire.ToList();
+            ViewBag.stergere = context.RegistruCopilire.ToList();
             return View();
         }
         [HttpPost]

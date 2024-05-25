@@ -57,11 +57,11 @@ namespace ProiectLicenta.Controllers
                 context.SaveChanges();
                 return Redirect("/Rasaduri");
             }
-            return View(addRasadViewModel);
+            return Adaugare();
         }
         public IActionResult Stergere()
         {
-            ViewBag.events = context.Rasad.ToList();
+            ViewBag.stergere = context.Rasad.ToList();
             return View();
         }
         [HttpPost]
