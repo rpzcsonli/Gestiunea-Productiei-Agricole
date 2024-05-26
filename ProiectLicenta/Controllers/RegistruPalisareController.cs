@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -36,7 +37,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<RegistruPalisare> registruPalisare = context.RegistruPalisare.ToList();
+            List<RegistruPalisare> registruPalisare = context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).ToList();
             return View(registruPalisare);
         }
         [HttpGet]
@@ -44,7 +45,7 @@ namespace ProiectLicenta.Controllers
         {
             AddRegistruPalisareViewModel addRegistruPalisareViewModel = new AddRegistruPalisareViewModel();
             CheiExterne(addRegistruPalisareViewModel);
-            addRegistruPalisareViewModel.DataPalisare =DateTime.Now;
+            addRegistruPalisareViewModel.DataPalisare = DateTime.Today;
             return View(addRegistruPalisareViewModel);
         }
         [HttpPost]

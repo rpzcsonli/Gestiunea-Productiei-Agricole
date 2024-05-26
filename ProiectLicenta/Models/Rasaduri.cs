@@ -19,7 +19,7 @@ namespace ProiectLicenta.Models
         public DateTime DataMaturitate { get; set; }
         [Required]
         public int Cantitate { get; set; }
-        public Plante? Plante { get; set; }
+        public Plante Plante { get; set; }
         public ICollection<Parcela> Parcela { get; set; }
         public Rasaduri(int CodRasad, string Denumire, int CodPlanta, DateTime DataSemanat, DateTime DataMaturitate, int Cantitate)
         {

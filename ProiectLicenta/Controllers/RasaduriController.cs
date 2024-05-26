@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -18,7 +19,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Rasaduri> rasad = context.Rasad.ToList();
+            List<Rasaduri> rasad = context.Rasad.Include(r => r.Plante).ToList();
             return View(rasad);
         }
         public void CheiExterne(AddRasadViewModel intrare)
@@ -27,17 +28,18 @@ namespace ProiectLicenta.Controllers
             ViewBag.codPlanta = codPlanta.Select(p => new SelectListItem
             {
                 Value = p.CodPlanta.ToString(),
-                Text = p.Nume,
+                Text = p.CodPlanta + " - "+p.Nume,
                 Selected = p.CodPlanta == intrare.CodPlanta,
             });
         }
+
         [HttpGet]
         public IActionResult Adaugare()
         {
             AddRasadViewModel addRasadViewModel = new AddRasadViewModel();
             CheiExterne(addRasadViewModel);
-            addRasadViewModel.DataSemanat = DateTime.Now;
-            addRasadViewModel.DataMaturitate = DateTime.Now;
+            addRasadViewModel.DataSemanat = DateTime.Today;
+            addRasadViewModel.DataMaturitate = DateTime.Today;
             return View(addRasadViewModel);
         }
         [HttpPost]

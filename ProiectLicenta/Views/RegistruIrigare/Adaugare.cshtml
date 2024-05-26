@@ -3,33 +3,34 @@
 @{
     ViewData["Title"] = "Adaugare Irigare";
 }
-
-
-    <h1>Adaugare Irigare</h1>
-    <form method="post">
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Irigare</h1>
+<div>
+<input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "RegistruIrigare") + "'");" />
     <div asp-controller="RegistruIrigare" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="CodParcela">Cod Parcela</label>
-            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
-            <span asp-validation-for="CodParcela"></span>
+        <form method="post">
+            <div class="mb-3">
+                <select class="form-select form-control-lg" asp-for="CodParcela" asp-items="ViewBag.codParcela">
+                    <option value="0" hidden>Alege Parcela</option>
+            </select>
+                <span class="text-danger" asp-validation-for="CodParcela"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="DurataIrigare">Durata Irigare</label>
-            <input asp-for="DurataIrigare" />
-            <span asp-validation-for="DurataIrigare"></span>
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Durata Irigare" asp-for="DurataIrigare" />
+                <label for="floatingInput" asp-for="DurataIrigare">Durata Irigare</label>
+                <span class="text-danger" asp-validation-for="DurataIrigare"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="CodAngajat">Angajat</label>
-            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
-            <span asp-validation-for="CodAngajat"></span>
+            <div class="mb-3">
+                <select class="form-select form-control-lg" asp-for="CodAngajat" asp-items="ViewBag.codAngajat">
+                    <option value="0" hidden>Alege Angajat</option>
+            </select>
+                <span class="text-danger" asp-validation-for="CodAngajat"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="DataIrigare">Data Irigare</label>
-            <input asp-for="DataIrigare" />
-            <span asp-validation-for="DataIrigare"></span>
+            <div class="form-floating date mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Data Irigare" asp-for="DataIrigare" />
+                <label for="floatingInput" asp-for="DataIrigare">Data Irigare</label>
+                <span class="text-danger" asp-validation-for="DataIrigare"></span>
             </div>
-        </div>
-
-        <input type="submit" value="Adaugare Irigare" />
+            <input class="btn btn-primary" type="submit" value="Adaugare Irigare" />
     </form>
-
+</div>
+</div>

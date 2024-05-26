@@ -5,15 +5,14 @@
 @model List<Plante>
 <h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center"> Plante </h1>
 
-<table>
+<table class="mb-3">
     <tr>
+        <th> <input class="btn btn-warning" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" /></th>
         <th> <a class="btn btn-primary" asp-controller="Plante" asp-action="Adaugare"> Adauga Plante</a></th>
-
-
         <th>    <a class="btn btn-primary" asp-controller="Plante" asp-action="Stergere"> Sterge Plante</a></th>
     </tr>
 </table>
-    </br>
+
 
 @if (Model.Count == 0)
 {

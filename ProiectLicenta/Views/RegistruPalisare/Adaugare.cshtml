@@ -1,35 +1,36 @@
 ﻿@using ProiectLicenta.ViewModels;
 @model AddRegistruPalisareViewModel;
-
 @{
     ViewData["Title"] = "Adaugare Palisare";
 }
-
-<h1>Adaugare Palisare</h1>
-    <form method="post">
-    <div asp-controller="RegistruPalisare" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="CodParcela">Parcela</label>
-            <select asp-for="CodParcela" asp-items="ViewBag.codParcela"></select>
-            <span asp-validation-for="CodParcela"></span>
+<h1 class ="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Palisare</h1>
+<div>
+    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "RegistruPalisare") + "'");" />
+    <div asp-controller="RegistruPalisare" asp-action="Adaugare" class="bd-example">
+        <form method="post">
+            <div class="mb-3">
+                <select class="form-select form-control-lg" asp-for="CodParcela" asp-items="ViewBag.codParcela">
+                    <option value="0" hidden>Alege Parcela</option>
+            </select>
+                <span class="text-danger" asp-validation-for="CodParcela"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="NumarPlante">Numar Plante</label>
-            <input asp-for="NumarPlante" />
-            <span asp-validation-for="NumarPlante"></span>
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Numar Plante" asp-for="NumarPlante" />
+                <label for="floatingInput" asp-for="NumarPlante">Numar Plante</label>
+                <span class="text-danger" asp-validation-for="NumarPlante"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="CodAngajat">Angajat</label>
-            <select asp-for="CodAngajat" asp-items="ViewBag.codAngajat"></select>
-            <span asp-validation-for="CodAngajat"></span>
+            <div class="mb-3">
+                <select class="form-select form-control-lg" asp-for="CodAngajat" asp-items="ViewBag.codAngajat">
+                    <option value="0" hidden>Alege Angajat</option>
+            </select>
+                <span class="text-danger" asp-validation-for="CodAngajat"></span>
             </div>
-            <div class="form-group">
-            <label asp-for="DataPalisare">Data Palisare</label>
-            <input asp-for="DataPalisare" />
-            <span asp-validation-for="DataPalisare"></span>
+            <div class="form-floating date mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Data Palisare" asp-for="DataPalisare" />
+                <label for="floatingInput"  asp-for="DataPalisare">Data Palisare</label>
+                <span class="text-danger" asp-validation-for="DataPalisare"></span>
             </div>
-        </div>
-
-        <input type="submit" value="Adaugare Palisare" />
+            <input class="btn btn-primary" type="submit" value="Adaugare Palisare" />
     </form>
-
+</div>
+</div>

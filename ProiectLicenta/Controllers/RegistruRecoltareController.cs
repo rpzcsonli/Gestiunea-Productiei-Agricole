@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -20,7 +21,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<RegistruRecoltare> registruRecoltare = context.RegistruRecoltare.ToList();
+            List<RegistruRecoltare> registruRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).ThenInclude(r => r.Plante).Include(r => r.Angajat).ToList();
             return View(registruRecoltare);
         }
         public void CheiExterne(AddRegistruRecoltareViewModel intrare)
@@ -46,7 +47,7 @@ namespace ProiectLicenta.Controllers
         {
             AddRegistruRecoltareViewModel addRegistruRecoltareViewModel = new AddRegistruRecoltareViewModel();
             CheiExterne(addRegistruRecoltareViewModel);
-            addRegistruRecoltareViewModel.DataRecoltare = DateTime.Now;
+            addRegistruRecoltareViewModel.DataRecoltare = DateTime.Today;
             return View(addRegistruRecoltareViewModel);
         }
         [HttpPost]

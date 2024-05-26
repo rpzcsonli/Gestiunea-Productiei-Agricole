@@ -20,7 +20,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<RegistruCopilire> registruCopilire = context.RegistruCopilire.ToList();
+            List<RegistruCopilire> registruCopilire = context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).ToList();
             return View(registruCopilire);
         }
         
@@ -48,7 +48,7 @@ namespace ProiectLicenta.Controllers
         {
             AddRegistruCopilireViewModel addRegistruCopilireViewModel = new AddRegistruCopilireViewModel();
            CheiExterne(addRegistruCopilireViewModel);
-            addRegistruCopilireViewModel.DataCopilire =DateTime.Now;
+            addRegistruCopilireViewModel.DataCopilire = DateTime.Today;
             return View(addRegistruCopilireViewModel);
         }
         [HttpPost]

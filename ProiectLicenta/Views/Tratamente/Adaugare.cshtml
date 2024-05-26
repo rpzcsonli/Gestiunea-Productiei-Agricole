@@ -3,25 +3,32 @@
 @{
     ViewData["Title"] = "Adaugare Tratamente";
 }
-    <h1>Adaugare Tratamente</h1>
-    <form method="post">
-        <div asp-controller="Tratamente" asp-action="Adaugare" class="form-group">
-            <div class="form-group">
-            <label asp-for="Denumire">Denumire</label>
-            <input asp-for="Denumire" />
-            <span asp-validation-for="Denumire"></span>
-            </div>
-            <div class="form-group">
-            <label asp-for="Cantitate">Cantitate Administrare</label>
-            <input asp-for="Cantitate" />
-            <span asp-validation-for="Cantitate"></span>
-            </div>
-            <div class="form-group">
-            <label asp-for="Perioada">Perioada Administrare</label>
-            <input asp-for="Perioada" />
-            <span asp-validation-for="Perioada"></span>
-            </div>
-        </div>
-        <input type="submit" value="Adaugare Tratament" />
-    </form>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Tratamente</h1>
 
+<div>
+    <div asp-controller="Tratamente" asp-action="Adaugare" class="bd-example">
+        <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Tratamente") + "'");" />
+    <form method="post">
+    
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Denumire" asp-for="Denumire" />
+                <label for="floatingInput" asp-for="Denumire">Denumire</label>
+                <span class="text-danger" asp-validation-for="Denumire"></span>
+            </div>
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Cantitate" asp-for="Cantitate" />
+                <label for="floatingInput" asp-for="Cantitate">Cantitate Administrare</label>
+                <span class="text-danger" asp-validation-for="Cantitate"></span>
+            </div>
+            <div class=" form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Perioada" asp-for="Perioada" />
+                <label for="floatingInput" asp-for="Perioada">Perioada Administrare</label>
+                <span class="text-danger" asp-validation-for="Perioada"></span>
+            </div>
+
+            <input class="btn btn-primary" type="submit" value="Adaugare Tratament" />
+            
+
+    </form>
+    </div>
+</div>

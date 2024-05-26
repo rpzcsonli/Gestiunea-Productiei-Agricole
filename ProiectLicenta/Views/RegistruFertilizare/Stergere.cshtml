@@ -1,18 +1,55 @@
 ﻿@{
     ViewData["Title"] = "Stergere Fertilizare";
 }
-<h1>Sterge Fertilizare</h1>
+<h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Sterge Fertilizare</h1>
 <form method="post">
-    @foreach (var evt in ViewBag.stergere)
+    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "RegistruFertilizare") + "'");" />
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Selectie
+            </th>
+            <th>
+                Cod Fertilizare
+            </th>
+            <th>
+                Parcela
+            </th>
+            <th>
+                Suprafata
+            </th>
+            <th>
+                Angajat
+            </th>
+            <th>
+                Data Fertilizare
+            </th>
+        </tr>
+    @foreach (var var in ViewBag.stergere)
     {
-        <div class="form-group">
-            <label>
-                <span>@evt.CodFertilizare @evt.DataFertilizare</span>
-                <input type="checkbox" name="registruFertilizareId" value="@evt.CodFertilizare" />
-            </label>
-        </div>
+            <tr>
+                <td>
+                    <input type="checkbox" name="registruFertilizareId" value="@var.CodFertilizare" />
+                </td>
+                <td>
+                    @var.CodFertilizare
+                </td>
+                <td>
+                    @var.CodParcela
+                </td>
+                <td>
+                    @var.Suprafata
+                </td>
+                <td>
+                    @var.CodAngajat
+                </td>
+                <td>
+                    @var.DataFertilizare
+                </td>
+            </tr>
     }
-    <input type="submit" name="Stergere" class="btn btn-danger" />
+    </table>
+    <input type="submit" value="Stergere" name="Stergere" class="btn btn-danger" />
 </form>
 
 

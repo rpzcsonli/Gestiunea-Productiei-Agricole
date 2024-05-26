@@ -7,7 +7,7 @@
 
 <h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center">Adaugare Angajati</h1>
 <div>
-
+    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Angajati") + "'");" />
     <div asp-controller="Angajati" asp-action="Adaugare" class="bd-example">
         <form method="post">
             <div class=" form-floating mb-3">
@@ -38,7 +38,7 @@
                 <label for="floatingInput" asp-for="Email">Adresa de Email</label>
                 <span asp-validation-for="Email"></span>
             </div>
-            </br>
+            
             <input class="btn btn-primary" type="submit" value="Adaugare Angajat" />
         </form>
     </div>

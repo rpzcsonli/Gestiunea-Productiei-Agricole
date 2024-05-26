@@ -7,11 +7,10 @@
 }
 
 <h1 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 text-center"> Daunatori </h1>
-<table>
+<table class="mb-3">
     <tr>
+        <th> <input class="btn btn-warning" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" /></th>
         <th> <a class="btn btn-primary" asp-controller="Daunatori" asp-action="Adaugare"> Adauga Daunator</a></th>
-
-
         <th>    <a class="btn btn-primary" asp-controller="Daunatori" asp-action="Stergere"> Sterge Daunator</a></th>
     </tr>
 </table>
@@ -44,7 +43,7 @@ else
                     @var.Denumire
                 </td>
                 <td>
-                    @var.CodTratament
+                    @var.Tratament.Denumire
                 </td>
             </tr>
         }

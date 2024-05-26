@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -19,7 +20,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Parcela> parcela = context.Parcela.ToList();
+            List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ThenInclude(r => r.Plante).ToList();
             return View(parcela);
         }
         public void CheiExterne(AddParcelaViewModel intrare)
