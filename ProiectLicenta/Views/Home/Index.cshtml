@@ -4,28 +4,82 @@
 @{
     ViewData["Title"] = "Acasa";
 }
+<body style="background-image: url('/Poze/Background.svg'); background-repeat: repeat; background-size:30%">
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="bd-example ">
-        
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati">Angajati</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele">Parcele</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri">Rasaduri</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Plante">Plante</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Daunatori">Daunatori</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Tratamente">Tratamente</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruCopilire">Registru Copilire</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruFertilizare">Registru Fertilizare</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruIrigare">Registru Irigare</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruPalisare">Registru Palisare</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruRecoltare">Registru Recoltare</a>
-        <a class="list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruTratamente">Registru Tratamente</a>
+        <div style="width:80%;height:80%; padding:5px; background-color:white " id="Carusel" class="container-fluid carousel slide shadow-lg " data-bs-ride="carousel">
+        <div class="carousel-indicators ">
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner shadow-lg">
+            <div class="carousel-item active">
+                <img src="~/Poze/Poza3.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza4.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza5.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza10.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button  class="carousel-control-prev" type="button" data-bs-target="#Carusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span  class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#Carusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
     </div>
 }
 else
 {
-<div class="text-center">
-    <h1 class="display-4">Bine ai venit!</h1>
-    <p>Aceasta Platforma este doar pentru angajatii MilianaAgro</p>
-</div>
+
+    <div style="width:80%;height:80%;" id="Carusel" class="container-fluid carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#Carusel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner shadow-lg">
+            <div class="carousel-item active">
+                <img src="~/Poze/Poza3.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza4.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza5.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Poze/Poza10.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#Carusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#Carusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
+    </div>
 }
+
+</body>

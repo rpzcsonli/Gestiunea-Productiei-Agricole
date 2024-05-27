@@ -6463,7 +6463,7 @@ textarea.form-control-lg {
 }
 
 .carousel-dark .carousel-control-next-icon, .carousel-dark .carousel-control-prev-icon {
-    filter: invert(1) grayscale(100)
+    filter: invert(1) grayscale(100);
 }
 
 .carousel-dark .carousel-indicators [data-bs-target] {

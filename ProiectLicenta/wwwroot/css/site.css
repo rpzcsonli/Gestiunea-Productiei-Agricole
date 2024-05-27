@@ -18,5 +18,52 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('/Poze/Background.svg');
+    background-repeat:repeat;
+  
+}
+h1 {
+    font-size:4rem;
+    -webkit-text-fill-color:#282828;
+    -webkit-text-stroke-width: 0.05rem;
+    -webkit-text-stroke-color:white;
+}
+div > table {
+    background-color: white;
+    width: 1px;
+    text-align: center;
+
+}
+
+nav {
+    background-color: #E8F0FF;
+    
+}
+input[type="checkbox"] {
+    width: 1.3em;
+    height: 1.3rem;
+
+}
+
+
+.selectie {
+    width: 5rem;
+}
+.collapsing {
+    transition: none;
+}
+table {
+    table-layout: fixed;
+}
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+@media only screen and (max-width: 480px) {
+    .tablemobile {
+        overflow-x: auto;
+        display: block;
+    }
 }
