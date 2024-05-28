@@ -26,7 +26,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link"  asp-controller="Home" asp-action="Index">Acasa</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Acasa</a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User))
@@ -34,7 +34,7 @@
                             <ul class="navbar-nav">
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Date
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -63,10 +63,8 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <ul class="list-group list-group-flush">
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati">Angajati</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele">Parcele</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri">Rasaduri</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Plante">Plante</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportAngajati">Raport Angajati</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportParcela">Raport Parcela</a>
                                         </ul>
                                     </div>
                                 </li>

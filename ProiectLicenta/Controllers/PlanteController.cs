@@ -34,8 +34,8 @@ namespace ProiectLicenta.Controllers
             {
                 Plante newPlanta = new Plante(
                     addPlantaViewModel.CodPlanta,
-                    addPlantaViewModel.Nume,
-                    addPlantaViewModel.Descriere
+                    addPlantaViewModel.Nume
+                   
                 );
                 context.Plante.Add(newPlanta);
                 context.SaveChanges();

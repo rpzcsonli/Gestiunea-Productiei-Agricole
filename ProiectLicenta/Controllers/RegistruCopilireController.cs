@@ -40,7 +40,6 @@ namespace ProiectLicenta.Controllers
                 Text = p.Locatie,
                 Selected = p.CodParcela == intrare.CodParcela,
             });
-
         }
 
         [HttpGet]

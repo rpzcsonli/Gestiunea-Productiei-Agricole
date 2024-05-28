@@ -19,9 +19,8 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url('/Poze/Background.svg');
-    background-repeat:repeat;
-  
+    /*background-image: url('/Poze/Background.svg');
+    background-repeat: repeat;*/
 }
 h1 {
     font-size:4rem;

@@ -1,0 +1,56 @@
+﻿@using ProiectLicenta.Models
+@{
+    ViewData["Title"] = "Raport Parcela";
+}
+
+<h1 class="fw-bold pb-2 pb-xl-3 text-center">Raport Parcela</h1>
+
+<div>
+    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+
+    <form method="get" action="@Url.Action("Index")">
+        <div class="form-group mb-3">
+            <select class="form-select form-control-lg" asp-items="ViewBag.Parcele" name="parcelaSelectata">
+                <option value="0" hidden>Alege Parcela</option>
+            </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Cauta" />
+    </form>
+
+    @if (Model != null)
+    {
+        int total = 0;
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cod Recoltare</th>
+                    <th>Cantitate Recoltata</th>
+                    <th>Data Recoltare</th>
+                    <th>Parcela</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CodRecoltare</td>
+                        <td>@item.CantitateRecoltata</td>
+                        <td>@item.DataRecoltare.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Parcela</td>
+                    </tr>
+                    total = total + item.CantitateRecoltata;
+                }
+                <tr>
+                    <th> Total</th>
+                    <th> @total</th>
+                    <th> </th>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No data available.</p>
+    }
+</div>
