@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProiectLicenta.Controllers
 {
     [Authorize]
     public class ParceleController : Controller
     {
-
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
         public ParceleController(ApplicationDbContext dbcontext)
         {
             this.context = dbcontext;
@@ -32,8 +33,6 @@ namespace ProiectLicenta.Controllers
                 Text = p.Denumire,
                 Selected = p.CodRasad == intrare.CodRasad,
             });
-            
-
         }
         [HttpGet]
         public IActionResult Adaugare()
@@ -47,20 +46,30 @@ namespace ProiectLicenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                Parcela newParcela = new Parcela(
-                    addParcelaViewModel.CodParcela,
-                    addParcelaViewModel.Locatie,
-                    addParcelaViewModel.Tip,
-                    addParcelaViewModel.Suprafata,
-                    addParcelaViewModel.CodRasad,
-                    addParcelaViewModel.NumarPlante
-                );
-
-                context.Parcela.Add(newParcela);
-                context.SaveChanges();
-                return Redirect("/Parcele");
+                var selectedRasaduri = context.Rasad.Find(addParcelaViewModel.CodRasad);
+                if (selectedRasaduri != null && selectedRasaduri.Cantitate >= addParcelaViewModel.NumarPlante)
+                {
+                    selectedRasaduri.Cantitate -= addParcelaViewModel.NumarPlante;
+                    Parcela newParcela = new Parcela(
+                     addParcelaViewModel.CodParcela,
+                     addParcelaViewModel.Locatie,
+                     addParcelaViewModel.Tip,
+                     addParcelaViewModel.Suprafata,
+                     addParcelaViewModel.CodRasad,
+                     addParcelaViewModel.NumarPlante
+                    );
+                    context.Parcela.Add(newParcela);
+                    context.SaveChanges();
+                    return Redirect("/Parcele");
+                }
+                else
+                {
+                   
+                    ModelState.AddModelError(string.Empty, "Numarul de plante este prea mare!");
+                }
             }
-            return Adaugare();
+            CheiExterne(addParcelaViewModel);
+            return View(addParcelaViewModel);
         }
         public IActionResult Stergere()
         {
@@ -74,7 +83,6 @@ namespace ProiectLicenta.Controllers
             {
                 Parcela parcela = context.Parcela.Find(Id);
                 context.Parcela.Remove(parcela);
-
             }
             context.SaveChanges();
             return Redirect("/Parcele");
