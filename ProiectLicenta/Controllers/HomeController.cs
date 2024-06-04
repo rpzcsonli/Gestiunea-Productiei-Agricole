@@ -24,7 +24,7 @@ namespace ProiectLicenta.Controllers
             var totalPlante = context.Parcela.Sum(p => p.NumarPlante);
             var totalAngajati = context.Angajat.Count();
             var totalRasaduri = context.Rasad.Sum(p => p.Cantitate);
-            var totalTratamente = context.Tratament.Count();
+            var totalTratamente = context.RegistruTratamente.Count();
             var totalIrigari = context.RegistruIrigare.Count();
             var totalFertilizari = context.RegistruFertilizare.Count();
             var totalPalisari = context.RegistruPalisare.Count();
@@ -46,16 +46,33 @@ namespace ProiectLicenta.Controllers
             return View(statisticiViewModel);
         }
 
-
-        public IActionResult Contact()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult Contact()
+        {
+            ContactViewModel contactViewModel = new ContactViewModel();
+            return View(contactViewModel);
+        }
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel contactViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Contact newContact = new Contact(
+                    contactViewModel.CodContact,
+                    contactViewModel.Nume,
+                    contactViewModel.Email,
+                    contactViewModel.Subiect,
+                    contactViewModel.Mesaj
+                );
+                context.Contact.Add(newContact);
+                context.SaveChanges();
+                return Redirect("/Home/Contact");
+            }
+            return Contact();
         }
     }
 }

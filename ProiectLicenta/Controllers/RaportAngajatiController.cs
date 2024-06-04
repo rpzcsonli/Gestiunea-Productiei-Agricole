@@ -13,17 +13,17 @@ namespace ProiectLicenta.Controllers
     [Authorize]
     public class RaportAngajatiController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
-        public RaportAngajatiController(ApplicationDbContext context)
+        public RaportAngajatiController(ApplicationDbContext dbcontext)
         {
-            _context = context;
+            context = dbcontext;
         }
 
         [HttpGet]
         public IActionResult Index(int? angajatSelectat, string registruSelectat)
         {
-            var angajati = _context.Angajat.ToList();
+            List<Angajat> angajati = context.Angajat.ToList();
             ViewBag.Angajati = angajati.Select(p => new SelectListItem
             {
                 Value = p.CodAngajat.ToString(),
@@ -43,7 +43,7 @@ namespace ProiectLicenta.Controllers
 
             if (angajatSelectat.HasValue && angajatSelectat.Value != 0 && !string.IsNullOrEmpty(registruSelectat))
             {
-                var reportData = _context.Angajat
+                List<RaportAngajati> reportData = context.Angajat
                     .Where(p => p.CodAngajat == angajatSelectat.Value)
                     .Select(p => new RaportAngajati
                     {

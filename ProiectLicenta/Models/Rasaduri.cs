@@ -11,21 +11,21 @@ namespace ProiectLicenta.Models
         [Required]
         [MaxLength(50)]
         public string Denumire { get; set; }
-        [ForeignKey("Plante")]
-        public int CodPlanta { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Planta { get; set; }
         [Required]
         public DateTime DataSemanat { get; set; }
         [Required]
         public DateTime DataMaturitate { get; set; }
         [Required]
         public int Cantitate { get; set; }
-        public Plante Plante { get; set; }
         public ICollection<Parcela> Parcela { get; set; }
-        public Rasaduri(int CodRasad, string Denumire, int CodPlanta, DateTime DataSemanat, DateTime DataMaturitate, int Cantitate)
+        public Rasaduri(int CodRasad, string Denumire, string Planta, DateTime DataSemanat, DateTime DataMaturitate, int Cantitate)
         {
             this.CodRasad = CodRasad;
             this.Denumire = Denumire;
-            this.CodPlanta = CodPlanta;
+            this.Planta = Planta;
             this.DataSemanat = DataSemanat;
             this.DataMaturitate = DataMaturitate;
             this.Cantitate = Cantitate;

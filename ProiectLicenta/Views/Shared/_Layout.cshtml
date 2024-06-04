@@ -48,7 +48,6 @@
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati">Angajati</a>
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele">Parcele</a>
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri">Rasaduri</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Plante">Plante</a>
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Daunatori">Daunatori</a>
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Tratamente">Tratamente</a>
                                             <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruCopilire">Registru Copilire</a>
@@ -113,7 +112,12 @@
 
     <footer class="border-top footer text-muted" style="background-color:#E8F0FF">
         <div class="container">
-            &copy; 2024 - MilianaAgro - <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+            &copy; 2024 - MilianaAgro @if (!SignInManager.IsSignedIn(User))
+            {
+                <span>-</span>
+
+                <a asp-controller="Home" asp-action="Contact"> Contact </a>
+            }
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

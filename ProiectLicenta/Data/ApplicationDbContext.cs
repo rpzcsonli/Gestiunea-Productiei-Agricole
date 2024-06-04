@@ -11,7 +11,6 @@ namespace ProiectLicenta.Data
         public DbSet<Angajat> Angajat { get; set; }
         public DbSet<Daunatori> Daunatori { get; set; }
         public DbSet<Parcela> Parcela { get; set; }
-        public DbSet<Plante> Plante { get; set; }
         public DbSet<Rasaduri> Rasad { get; set; }
         public DbSet<Tratament> Tratament { get; set; }
         public DbSet<RegistruCopilire> RegistruCopilire { get; set; }
@@ -20,7 +19,7 @@ namespace ProiectLicenta.Data
         public DbSet<RegistruPalisare> RegistruPalisare { get; set; }
         public DbSet<RegistruRecoltare> RegistruRecoltare{ get; set; }
         public DbSet<RegistruTratamente> RegistruTratamente{ get; set; }
-
+        public DbSet<Contact> Contact { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

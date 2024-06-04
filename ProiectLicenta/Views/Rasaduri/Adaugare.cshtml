@@ -11,11 +11,11 @@
                 <label for="floatingInput" asp-for="Denumire">Denumire</label>
                 <span class="text-danger" asp-validation-for="Denumire"></span>
             </div>
-            <div class="mb-3">
-                <select class="form-select form-control-lg" asp-for="CodPlanta" asp-items="ViewBag.codPlanta">
-                    <option value="0" hidden>Alege Planta</option>
-                </select>
-                <span class="text-danger" asp-validation-for="CodPlanta"></span>
+            <div class="form-floating mb-3">
+                <input id="floatingInput" class="form-control" placeholder="Planta" asp-for="Planta" />
+                <label for="floatingInput" asp-for="Planta">Planta</label>
+                <span class="text-danger" asp-validation-for="Planta"></span>
+
             </div>
             <div class="form-floating date mb-3">
                 <input id="floatingInput" class="form-control" placeholder="Data Semanat" asp-for="DataSemanat" />

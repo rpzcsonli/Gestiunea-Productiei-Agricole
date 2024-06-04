@@ -21,7 +21,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<RegistruRecoltare> registruRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).ThenInclude(r => r.Plante).Include(r => r.Angajat).ToList();
+            List<RegistruRecoltare> registruRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).Include(r => r.Angajat).ToList();
             return View(registruRecoltare);
         }
         public void CheiExterne(AddRegistruRecoltareViewModel intrare)

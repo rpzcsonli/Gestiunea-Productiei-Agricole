@@ -1,6 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<h1>@ViewData["Title"]</h1>
-
-<p>Datele de contact</p>
+﻿@using ProiectLicenta.ViewModels;
+@model ContactViewModel;
+@{ViewData["Title"] = "Contact";}
+<div class="container mt-5">
+    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Contact MilianaAgro</h2>
+            <p>Completati formularul de contact.</p>
+            <div asp-controller="Rasaduri" asp-action="Contact">
+            <form method="post">
+                    <div class=" form-floating mb-3">
+                        <input id="floatingInput" class="form-control" placeholder="Nume" asp-for="Nume" />
+                        <label for="floatingInput" asp-for="Nume">Nume</label>
+                        <span class="text-danger" asp-validation-for="Nume"></span>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input id="floatingInput" class="form-control" placeholder="Email" asp-for="Email" />
+                        <label for="floatingInput" asp-for="Email">Email</label>
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input id="floatingInput" class="form-control" placeholder="Subiect" asp-for="Subiect" />
+                        <label for="floatingInput" asp-for="Subiect">Subiect</label>
+                        <span class="text-danger" asp-validation-for="Subiect"></span>
+                    </div>
+                    <div class=" form-floating mb-3">
+                        <input id="floatingInput" class="form-control" placeholder="Mesaj" asp-for="Mesaj" />
+                        <label for="floatingInput" asp-for="Mesaj">Mesaj</label>
+                        <span class="text-danger" asp-validation-for="Mesaj"></span>
+                    </div>
+                <button type="submit" class="btn btn-primary">Trimite</button>
+            </form>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding-inline-start: 4%">
+            <h2>Adresa Noastra:</h2>
+            <br></br>
+            <div>
+            <p>Cooperativa MilianaAgro</p>
+            <p>Judetul Bacau, Comuna Parava</p>
+            <p>Strada Eroilor, Numarul 5</p>
+            <p>Email: contact@milianaagro.com</p>
+                <p>Telefon: +40748588423</p>
+            </div>
+        </div>
+    </div>
+</div>

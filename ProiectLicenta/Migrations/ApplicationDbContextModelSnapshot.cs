@@ -261,6 +261,38 @@ namespace ProiectLicenta.Migrations
                     b.ToTable("Angajat");
                 });
 
+            modelBuilder.Entity("ProiectLicenta.Models.Contact", b =>
+                {
+                    b.Property<int>("CodContact")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodContact"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mesaj")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Subiect")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("CodContact");
+
+                    b.ToTable("Contact");
+                });
+
             modelBuilder.Entity("ProiectLicenta.Models.Daunatori", b =>
                 {
                     b.Property<int>("CodDaunator")
@@ -277,14 +309,9 @@ namespace ProiectLicenta.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("PlanteCodPlanta")
-                        .HasColumnType("int");
-
                     b.HasKey("CodDaunator");
 
                     b.HasIndex("CodTratament");
-
-                    b.HasIndex("PlanteCodPlanta");
 
                     b.ToTable("Daunatori");
                 });
@@ -323,24 +350,6 @@ namespace ProiectLicenta.Migrations
                     b.ToTable("Parcela");
                 });
 
-            modelBuilder.Entity("ProiectLicenta.Models.Plante", b =>
-                {
-                    b.Property<int>("CodPlanta")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodPlanta"));
-
-                    b.Property<string>("Nume")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("CodPlanta");
-
-                    b.ToTable("Plante");
-                });
-
             modelBuilder.Entity("ProiectLicenta.Models.Rasaduri", b =>
                 {
                     b.Property<int>("CodRasad")
@@ -350,9 +359,6 @@ namespace ProiectLicenta.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodRasad"));
 
                     b.Property<int>("Cantitate")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CodPlanta")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataMaturitate")
@@ -366,9 +372,12 @@ namespace ProiectLicenta.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("CodRasad");
+                    b.Property<string>("Planta")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasIndex("CodPlanta");
+                    b.HasKey("CodRasad");
 
                     b.ToTable("Rasad");
                 });
@@ -509,16 +518,11 @@ namespace ProiectLicenta.Migrations
                     b.Property<DateTime>("DataRecoltare")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PlanteCodPlanta")
-                        .HasColumnType("int");
-
                     b.HasKey("CodRecoltare");
 
                     b.HasIndex("CodAngajat");
 
                     b.HasIndex("CodParcela");
-
-                    b.HasIndex("PlanteCodPlanta");
 
                     b.ToTable("RegistruRecoltare");
                 });
@@ -640,10 +644,6 @@ namespace ProiectLicenta.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProiectLicenta.Models.Plante", null)
-                        .WithMany("Daunatori")
-                        .HasForeignKey("PlanteCodPlanta");
-
                     b.Navigation("Tratament");
                 });
 
@@ -656,17 +656,6 @@ namespace ProiectLicenta.Migrations
                         .IsRequired();
 
                     b.Navigation("Rasaduri");
-                });
-
-            modelBuilder.Entity("ProiectLicenta.Models.Rasaduri", b =>
-                {
-                    b.HasOne("ProiectLicenta.Models.Plante", "Plante")
-                        .WithMany("Rasaduri")
-                        .HasForeignKey("CodPlanta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Plante");
                 });
 
             modelBuilder.Entity("ProiectLicenta.Models.RegistruCopilire", b =>
@@ -759,10 +748,6 @@ namespace ProiectLicenta.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProiectLicenta.Models.Plante", null)
-                        .WithMany("RegistruRecoltare")
-                        .HasForeignKey("PlanteCodPlanta");
-
                     b.Navigation("Angajat");
 
                     b.Navigation("Parcela");
@@ -828,15 +813,6 @@ namespace ProiectLicenta.Migrations
                     b.Navigation("RegistruRecoltare");
 
                     b.Navigation("RegistruTratamente");
-                });
-
-            modelBuilder.Entity("ProiectLicenta.Models.Plante", b =>
-                {
-                    b.Navigation("Daunatori");
-
-                    b.Navigation("Rasaduri");
-
-                    b.Navigation("RegistruRecoltare");
                 });
 
             modelBuilder.Entity("ProiectLicenta.Models.Rasaduri", b =>

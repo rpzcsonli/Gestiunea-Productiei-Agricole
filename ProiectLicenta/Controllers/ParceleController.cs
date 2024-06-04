@@ -21,7 +21,7 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ThenInclude(r => r.Plante).ToList();
+            List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ToList();
             return View(parcela);
         }
         public void CheiExterne(AddParcelaViewModel intrare)
@@ -30,7 +30,7 @@ namespace ProiectLicenta.Controllers
             ViewBag.codRasad = codRasad.Select(p => new SelectListItem
             {
                 Value = p.CodRasad.ToString(),
-                Text = p.Denumire,
+                Text = p.Planta + "-" +p.Denumire,
                 Selected = p.CodRasad == intrare.CodRasad,
             });
         }

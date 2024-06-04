@@ -11,17 +11,17 @@ namespace ProiectLicenta.Controllers
     [Authorize]
     public class RaportParcelaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
-        public RaportParcelaController(ApplicationDbContext context)
+        public RaportParcelaController(ApplicationDbContext dbcontext)
         {
-            _context = context;
+            context = dbcontext;
         }
 
         [HttpGet]
         public IActionResult Index(int? parcelaSelectata)
         {
-            var parcele = _context.Parcela.ToList();
+            var parcele = context.Parcela.ToList();
             ViewBag.Parcele = parcele.Select(p => new SelectListItem
             {
                 Value = p.CodParcela.ToString(),
@@ -31,7 +31,7 @@ namespace ProiectLicenta.Controllers
 
             if (parcelaSelectata.HasValue && parcelaSelectata.Value != 0)
             {
-                var reportData = _context.RegistruRecoltare
+                var reportData = context.RegistruRecoltare
                     .Where(r => r.CodParcela == parcelaSelectata.Value)
                     .Select(r => new
                     {

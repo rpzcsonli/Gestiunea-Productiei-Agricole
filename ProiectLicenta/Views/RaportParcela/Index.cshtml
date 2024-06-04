@@ -1,8 +1,9 @@
 ﻿@using ProiectLicenta.Models
+@using ProiectLicenta.ViewModels
 @{
     ViewData["Title"] = "Raport Parcela";
 }
-
+@model IEnumerable<dynamic>;
 <h1 class="fw-bold pb-2 pb-xl-3 text-center">Raport Parcela</h1>
 
 <div>
@@ -17,7 +18,7 @@
         <input class="btn btn-primary" type="submit" value="Cauta" />
     </form>
 
-    @if (Model != null)
+    @if (Model != null && Model.Any())
     {
         int total = 0;
         <table class="table">
@@ -51,6 +52,7 @@
     }
     else
     {
-        <p>No data available.</p>
+        <br />
+        <p>Nu exista date!</p>
     }
 </div>

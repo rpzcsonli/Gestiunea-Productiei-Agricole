@@ -19,25 +19,14 @@ namespace ProiectLicenta.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Rasaduri> rasad = context.Rasad.Include(r => r.Plante).ToList();
+            List<Rasaduri> rasad = context.Rasad.ToList();
             return View(rasad);
         }
-        public void CheiExterne(AddRasadViewModel intrare)
-        {
-            var codPlanta = context.Plante.OrderBy(p => p.Nume).ToList();
-            ViewBag.codPlanta = codPlanta.Select(p => new SelectListItem
-            {
-                Value = p.CodPlanta.ToString(),
-                Text = p.CodPlanta + " - "+p.Nume,
-                Selected = p.CodPlanta == intrare.CodPlanta,
-            });
-        }
-
+       
         [HttpGet]
         public IActionResult Adaugare()
         {
             AddRasadViewModel addRasadViewModel = new AddRasadViewModel();
-            CheiExterne(addRasadViewModel);
             addRasadViewModel.DataSemanat = DateTime.Today;
             addRasadViewModel.DataMaturitate = DateTime.Today;
             return View(addRasadViewModel);
@@ -50,7 +39,7 @@ namespace ProiectLicenta.Controllers
                 Rasaduri newRasaduri = new Rasaduri(
                     addRasadViewModel.CodRasad,
                     addRasadViewModel.Denumire, 
-                    addRasadViewModel.CodPlanta,
+                    addRasadViewModel.Planta,
                     addRasadViewModel.DataSemanat,
                     addRasadViewModel.DataMaturitate,
                     addRasadViewModel.Cantitate
