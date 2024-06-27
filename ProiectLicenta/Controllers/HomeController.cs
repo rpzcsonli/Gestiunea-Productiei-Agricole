@@ -17,7 +17,6 @@ namespace ProiectLicenta.Controllers
             _logger = logger;
             context = dbcontext;
         }
-
         public IActionResult Index()
         {
             var totalParcele = context.Parcela.Count();

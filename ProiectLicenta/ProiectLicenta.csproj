@@ -37,4 +37,12 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\VS-Projects\ProiectLicenta\ProiectLicenta\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\VS-Projects\ProiectLicenta\ProiectLicenta\.editorconfig" />
+  </ItemGroup>
+
 </Project>

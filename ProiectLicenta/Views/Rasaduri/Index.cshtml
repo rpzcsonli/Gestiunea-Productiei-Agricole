@@ -40,7 +40,7 @@ else
             </th>
         </tr>
         @foreach (var var in Model)
-        {
+        {if(var.Cantitate!=0){
             <tr>
                 <td>
                     @var.CodRasad
@@ -52,15 +52,16 @@ else
                     @var.Planta
                 </td>
                 <td>
-                    @var.DataSemanat
+                            @var.DataSemanat.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                   @var.DataMaturitate
+                            @var.DataMaturitate.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @var.Cantitate
                 </td>
-            </tr>
+                    </tr>
+                }
         }
 
     </table>

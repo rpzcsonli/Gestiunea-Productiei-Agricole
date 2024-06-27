@@ -9,7 +9,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-     <h1 class="  fw-bold pb-2 pb-xl-3 text-center"> Statistici </h1>
+    <h1 class="  fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-graph-up-arrow"></i> Statistici </h1>
 
     if (Model != null)
     {
@@ -18,7 +18,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Parcele</h5>
+                            <h5 class="card-title"><i class="bi bi-layout-wtf"></i> Total Parcele</h5>
                             <p class="card-text display-4">@Model.TotalParcele</p>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Rasaduri Plantate</h5>
+                            <h5 class="card-title"><i class="bi bi-box-arrow-in-down"></i> Total Rasaduri Plantate</h5>
                             <p class="card-text display-4">@Model.TotalPlante</p>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Rasaduri Disponibile</h5>
+                            <h5 class="card-title"><i class="bi bi-flower2"></i> Total Rasaduri Disponibile</h5>
                             <p class="card-text display-4">@Model.TotalRasaduri</p>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Angajati</h5>
+                            <h5 class="card-title"><i class="bi bi-person"></i> Total Angajati</h5>
                             <p class="card-text display-4">@Model.TotalAngajati</p>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Cantitate Recoltata</h5>
+                            <h5 class="card-title"><i class="bi bi-basket3"></i> Total Cantitate Recoltata</h5>
                             <p class="card-text display-4">@Model.TotalRecoltari</p>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Irigari</h5>
+                            <h5 class="card-title"><i class="bi bi-moisture"></i> Total Irigari</h5>
                             <p class="card-text display-4">@Model.TotalIrigari</p>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Tratamente</h5>
+                            <h5 class="card-title"><i class="bi bi-activity"></i> Total Tratamente</h5>
                             <p class="card-text display-4">@Model.TotalTratamente</p>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Fertilizari</h5>
+                            <h5 class="card-title"><i class="bi bi-eyedropper"></i> Total Fertilizari</h5>
                             <p class="card-text display-4">@Model.TotalFertilizari</p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Total Palisari</h5>
+                            <h5 class="card-title"><i class="bi bi-arrow-bar-up"></i> Total Palisari</h5>
                             <p class="card-text display-4">@Model.TotalPalisari</p>
                         </div>
                     </div>
@@ -142,11 +142,11 @@ else
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#Carusel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="bi bi-arrow-left-square-fill" style="font-size:4rem" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#Carusel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="bi bi-arrow-right-square-fill" style="font-size:4rem" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
