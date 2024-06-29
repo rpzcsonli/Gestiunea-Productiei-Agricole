@@ -18,9 +18,10 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<RegistruTratamente> registruTratamente = context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).ToList();
+            ViewBag.SortOrder = sortOrder;
+            List<RegistruTratamente> registruTratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).ToList(), sortOrder);
             return View(registruTratamente);
         }
         public void CheiExterne(AddRegistruTratamenteViewModel intrare)
@@ -92,6 +93,64 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/RegistruTratamente");
+        }
+        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        {
+            if (ListaDate == null || !ListaDate.Any())
+            {
+                return ListaDate;
+            }
+
+            if (string.IsNullOrEmpty(Ordine))
+            {
+                return ListaDate;
+            }
+
+            var descrescator = Ordine.EndsWith("_desc");
+            var propNume = descrescator ? Ordine.Substring(0, Ordine.Length - 5) : Ordine;
+            
+            Func<T, object> keySelector;
+            if (propNume == "Parcela")
+            {
+                keySelector = item => typeof(T).GetProperty("Parcela")?.GetValue(item)?.GetType().GetProperty("CodParcela")?.GetValue(typeof(T).GetProperty("Parcela")?.GetValue(item));
+            }
+            else
+               if (propNume == "Angajat")
+            {
+                keySelector = item => typeof(T).GetProperty("Angajat")?.GetValue(item)?.GetType().GetProperty("Nume")?.GetValue(typeof(T).GetProperty("Angajat")?.GetValue(item));
+            }
+            else
+               if (propNume == "Daunator")
+            {
+                keySelector = item => typeof(T).GetProperty("Daunatori")?.GetValue(item)?.GetType().GetProperty("Denumire")?.GetValue(typeof(T).GetProperty("Daunatori")?.GetValue(item));
+            }
+            else
+               if (propNume == "Tratament")
+            {
+                keySelector = item =>
+                {
+                    var tratament = typeof(T).GetProperty("Daunatori")?.GetValue(item)?.GetType().GetProperty("Tratament")?.GetValue(typeof(T).GetProperty("Daunatori")?.GetValue(item));
+                    return tratament?.GetType().GetProperty("Denumire")?.GetValue(tratament);
+                };
+            }
+            else
+            {
+                var propInfo = typeof(T).GetProperty(propNume);
+                if (propInfo == null)
+                {
+                    return ListaDate;
+                }
+                keySelector = item => propInfo.GetValue(item);
+            }
+            if (descrescator)
+            {
+                ListaDate = ListaDate.OrderByDescending(keySelector).ToList();
+            }
+            else
+            {
+                ListaDate = ListaDate.OrderBy(keySelector).ToList();
+            }
+            return ListaDate;
         }
     }
 }

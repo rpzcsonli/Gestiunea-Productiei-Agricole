@@ -17,9 +17,10 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<RegistruFertilizare> registruFertilizare = context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).ToList();
+            ViewBag.SortOrder = sortOrder;
+            List<RegistruFertilizare> registruFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).ToList(),sortOrder);
             return View(registruFertilizare);
         }
         public void CheiExterne(AddRegistruFertilizareViewModel intrare)
@@ -83,6 +84,50 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/RegistruFertilizare");
+        }
+        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        {
+            if (ListaDate == null || !ListaDate.Any())
+            {
+                return ListaDate;
+            }
+
+            if (string.IsNullOrEmpty(Ordine))
+            {
+                return ListaDate;
+            }
+
+            var descrescator = Ordine.EndsWith("_desc");
+            var propNume = descrescator ? Ordine.Substring(0, Ordine.Length - 5) : Ordine;
+            Func<T, object> keySelector;
+
+            if (propNume == "Parcela")
+            {
+                keySelector = item => typeof(T).GetProperty("Parcela")?.GetValue(item)?.GetType().GetProperty("CodParcela")?.GetValue(typeof(T).GetProperty("Parcela")?.GetValue(item));
+            }
+            else
+               if (propNume == "Angajat")
+            {
+                keySelector = item => typeof(T).GetProperty("Angajat")?.GetValue(item)?.GetType().GetProperty("Nume")?.GetValue(typeof(T).GetProperty("Angajat")?.GetValue(item));
+            }
+            else
+            {
+                var propInfo = typeof(T).GetProperty(propNume);
+                if (propInfo == null)
+                {
+                    return ListaDate;
+                }
+                keySelector = item => propInfo.GetValue(item);
+            }
+            if (descrescator)
+            {
+                ListaDate = ListaDate.OrderByDescending(keySelector).ToList();
+            }
+            else
+            {
+                ListaDate = ListaDate.OrderBy(keySelector).ToList();
+            }
+            return ListaDate;
         }
     }
 }

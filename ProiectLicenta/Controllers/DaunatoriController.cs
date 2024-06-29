@@ -18,9 +18,10 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<Daunatori> daunator = context.Daunatori.Include(r => r.Tratament).ToList();
+            ViewBag.SortOrder = sortOrder;
+            List<Daunatori> daunator = SortData(context.Daunatori.Include(r => r.Tratament).ToList(),sortOrder);
             return View(daunator);
         }
         public void CheiExterne(AddDaunatorViewModel intrare)
@@ -73,6 +74,46 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Daunatori");
+        }
+        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        {
+            if (ListaDate == null || !ListaDate.Any())
+            {
+                return ListaDate;
+            }
+
+            if (string.IsNullOrEmpty(Ordine))
+            {
+                return ListaDate;
+            }
+
+            var descrescator = Ordine.EndsWith("_desc");
+            var propNume = descrescator ? Ordine.Substring(0, Ordine.Length - 5) : Ordine;
+            Func<T, object> keySelector;
+
+            if (propNume == "Tratament")
+            {
+                keySelector = item => typeof(T).GetProperty("Tratament")?.GetValue(item)?.GetType().GetProperty("Denumire")?.GetValue(typeof(T).GetProperty("Tratament")?.GetValue(item));
+            }
+            else
+            {
+                var propInfo = typeof(T).GetProperty(propNume);
+                if (propInfo == null)
+                {
+                    return ListaDate;
+                }
+                keySelector = item => propInfo.GetValue(item);
+            }
+
+            if (descrescator)
+            {
+                ListaDate = ListaDate.OrderByDescending(keySelector).ToList();
+            }
+            else
+            {
+                ListaDate = ListaDate.OrderBy(keySelector).ToList();
+            }
+            return ListaDate;
         }
     }
 }

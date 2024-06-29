@@ -19,27 +19,39 @@ namespace ProiectLicenta.Controllers
         }
         public IActionResult Index()
         {
-            var totalParcele = context.Parcela.Count();
+            var numarParcele = context.Parcela.Count();
+            var suprafataPlante = context.Parcela.Sum(p => p.Suprafata);
             var totalPlante = context.Parcela.Sum(p => p.NumarPlante);
             var totalAngajati = context.Angajat.Count();
             var totalRasaduri = context.Rasad.Sum(p => p.Cantitate);
             var totalTratamente = context.RegistruTratamente.Count();
+            var suprafataTratamente = context.RegistruTratamente.Sum(p => p.Suprafata);
             var totalIrigari = context.RegistruIrigare.Count();
+            var durataIrigari = context.RegistruIrigare.Sum(p => p.DurataIrigare);
             var totalFertilizari = context.RegistruFertilizare.Count();
+            var suprafataFertilizari = context.RegistruFertilizare.Sum(p => p.Suprafata);
             var totalPalisari = context.RegistruPalisare.Count();
-            var totalRecoltari = context.RegistruRecoltare.Sum(p => p.CantitateRecoltata);
+            var plantePalisari = context.RegistruPalisare.Sum(p => p.NumarPlante);
+            var totalRecoltari = context.RegistruRecoltare.Count();
+            var cantitateRecoltari = context.RegistruRecoltare.Sum(p => p.CantitateRecoltata);
 
             var statisticiViewModel = new StatisticiViewModel
             {
-                TotalParcele = totalParcele,
+                NumarParcele = numarParcele,
+                SuprafataParcele= suprafataPlante,
                 TotalPlante = totalPlante,
                 TotalAngajati = totalAngajati,
-                TotalRasaduri = totalRasaduri,
+                TotalRasaduri =totalRasaduri,
                 TotalTratamente = totalTratamente,
-                TotalIrigari = totalIrigari,
+                SuprafataTratamente = suprafataTratamente,
+                TotalIrigari= totalIrigari,
+                DurataIrigari= durataIrigari,
                 TotalFertilizari = totalFertilizari,
+                SuprafataFertilizari = suprafataFertilizari,
                 TotalPalisari = totalPalisari,
-                TotalRecoltari = totalRecoltari
+                PlantePalisari = plantePalisari,
+                TotalRecoltari= totalRecoltari,
+                CantitateRecoltari = cantitateRecoltari
             };
 
             return View(statisticiViewModel);

@@ -17,9 +17,10 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index()
-        { 
-                List<Angajat> angajat = context.Angajat.ToList();
+        public ActionResult Index(string sortOrder)
+        {
+            ViewBag.SortOrder = sortOrder;
+            List<Angajat> angajat = SortData(context.Angajat.ToList(),sortOrder);
                 return View(angajat);
         }
 
@@ -65,6 +66,37 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Angajati");
+        }
+        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        {
+            if (ListaDate == null || !ListaDate.Any())
+            {
+                return ListaDate;
+            }
+
+            if (string.IsNullOrEmpty(Ordine))
+            {
+                return ListaDate;
+            }
+
+            var descrescator = Ordine.EndsWith("_desc");
+            var propNume = descrescator ? Ordine.Substring(0, Ordine.Length - 5) : Ordine;
+            var propInfo = typeof(T).GetProperty(propNume);
+
+            if (propInfo == null)
+            {
+                return ListaDate;
+            }
+
+            if (descrescator)
+            {
+                ListaDate = ListaDate.OrderByDescending(x => propInfo.GetValue(x, null)).ToList();
+            }
+            else
+            {
+                ListaDate = ListaDate.OrderBy(x => propInfo.GetValue(x, null)).ToList();
+            }
+            return ListaDate;
         }
 
     }

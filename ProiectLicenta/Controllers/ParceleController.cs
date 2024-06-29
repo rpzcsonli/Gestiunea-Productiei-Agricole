@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
@@ -19,9 +20,10 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ToList();
+            ViewBag.SortOrder = sortOrder;
+            List<Parcela> parcela = SortData(context.Parcela.Include(r => r.Rasaduri).ToList(),sortOrder);
             return View(parcela);
         }
         public void CheiExterne(AddParcelaViewModel intrare)
@@ -86,6 +88,46 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Parcele");
+        }
+        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        {
+            if (ListaDate == null || !ListaDate.Any())
+            {
+                return ListaDate;
+            }
+
+            if (string.IsNullOrEmpty(Ordine))
+            {
+                return ListaDate;
+            }
+
+            var descrescator = Ordine.EndsWith("_desc");
+            var propNume = descrescator ? Ordine.Substring(0, Ordine.Length - 5) : Ordine;
+            Func<T, object> keySelector;
+
+            if (propNume == "Rasaduri")
+            {
+                keySelector = item => typeof(T).GetProperty("Rasaduri")?.GetValue(item)?.GetType().GetProperty("Planta")?.GetValue(typeof(T).GetProperty("Rasaduri")?.GetValue(item));
+            }
+            else
+            {
+                var propInfo = typeof(T).GetProperty(propNume);
+                if (propInfo == null)
+                {
+                    return ListaDate;
+                }
+                keySelector = item => propInfo.GetValue(item);
+            }
+
+            if (descrescator)
+            {
+                ListaDate = ListaDate.OrderByDescending(keySelector).ToList();
+            }
+            else
+            {
+                ListaDate = ListaDate.OrderBy(keySelector).ToList();
+            }
+            return ListaDate;
         }
     }
 }

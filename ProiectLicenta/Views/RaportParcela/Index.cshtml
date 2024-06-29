@@ -8,7 +8,7 @@
     string registruSelectat = ViewBag.RegistruSelectat as string;
 }
 
-<h1 class="fw-bold pb-2 pb-xl-3 text-center">Raport Parcela</h1>
+<h1 class="fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-card-list"></i> Raport Parcela</h1>
 
 <div>
     <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
@@ -34,7 +34,7 @@
         {<th>
             <h3>@item.Locatie</h3>
             <p>Tip: @item.Tip</p>
-            <p>Suprafata: @item.Suprafata</p>
+                    <p>Suprafata: @item.Suprafata &#x33A1;</p>
                     <p>Numar Plante: @item.NumarPlante</p>
                 </th>
             @if (item.RegistruCopilire != null && item.RegistruCopilire.Any())
@@ -156,12 +156,12 @@
                                 total += @registru.Suprafata;
                                 <tr>
                                 <td>@registru.CodFertilizare</td>
-                                <td>@registru.Suprafata</td>
+                                    <td>@registru.Suprafata &#x33A1;</td>
                                 <td>@registru.DataFertilizare.ToString("dd/MM/yyyy")</td>
                             </tr>
                         }
                         <td>Total Suprafata</td>
-                        <td>@total</td>
+                        <td>@total &#x33A1;</td>
                         <td></td>
                     </tbody>
                 </table>
@@ -426,13 +426,13 @@
                                 <tr>
                                 <td>@registru.CodTratamentAplicat</td>
                                 <td>@registru.CodDaunator</td>
-                                <td>@registru.Suprafata</td>
+                                    <td>@registru.Suprafata &#x33A1;</td>
                                 <td>@registru.DataAplicare.ToString("dd/MM/yyyy")</td>
                             </tr>
                         }
                         <td></td>
                         <td>Total Suprafata</td>
-                        <td>@total</td>
+                        <td>@total &#x33A1;</td>
                         <td></td>
                     </tbody>
                 </table>

@@ -13,78 +13,200 @@
 
     if (Model != null)
     {
-        <div class="container mt-5">
+        float mediePlante = (float)Model.SuprafataParcele/Model.TotalPlante ;
+        float medieRecoltare = (float)Model.SuprafataParcele / Model.CantitateRecoltari;
+        float medieRecoltareAngajat = (float)Model.CantitateRecoltari/Model.TotalAngajati;
+        float mediePalisareAngajat = (float)Model.PlantePalisari / Model.TotalAngajati;
+        float medieFertilizareAngajat = (float)Model.SuprafataFertilizari / Model.TotalAngajati;
+        float medieIrigareAngajat = (float)Model.DurataIrigari / Model.TotalAngajati;
+
+        <div class="container mt-3" style="overflow-y:auto">
             <div class="row">
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><i class="bi bi-layout-wtf"></i> Total Parcele</h5>
-                            <p class="card-text display-4">@Model.TotalParcele</p>
+                            <h5 class="card-title"><i class="bi bi-layout-wtf"></i> Numar Parcele</h5>
+                            <p class="card-text display-6">@Model.NumarParcele</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><i class="bi bi-box-arrow-in-down"></i> Total Rasaduri Plantate</h5>
-                            <p class="card-text display-4">@Model.TotalPlante</p>
+                            <h5 class="card-title "><i class="bi bi-layout-wtf"></i> Suprafata Parcele</h5>
+                            <p class="card-text display-6">@Model.SuprafataParcele &#x33A1;</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><i class="bi bi-flower2"></i> Total Rasaduri Disponibile</h5>
-                            <p class="card-text display-4">@Model.TotalRasaduri</p>
+                            <h5 class="card-title"><i class="bi bi-layout-wtf"></i> Medie Plante/&#x33A1;</h5>
+                            <p class="card-text display-6">@mediePlante.ToString("0.00")</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                </div>
+            <div class="row">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-person"></i> Total Angajati</h5>
-                            <p class="card-text display-4">@Model.TotalAngajati</p>
+                            <p class="card-text display-6">@Model.TotalAngajati</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-flower2"></i> Total Rasaduri Disponibile</h5>
+                            <p class="card-text display-6">@Model.TotalRasaduri</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-box-arrow-in-down"></i> Total Rasaduri Plantate</h5>
+                            <p class="card-text display-6">@Model.TotalPlante</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-basket3"></i> Total Recoltari</h5>
+                            <p class="card-text display-6">@Model.TotalRecoltari</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-basket3"></i> Total Cantitate Recoltata</h5>
-                            <p class="card-text display-4">@Model.TotalRecoltari</p>
+                            <p class="card-text display-6">
+                                @Model.CantitateRecoltari &#13199;
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><i class="bi bi-moisture"></i> Total Irigari</h5>
-                            <p class="card-text display-4">@Model.TotalIrigari</p>
+                            <h5 class="card-title"><i class="bi bi-basket3"></i> Medie Recoltare pe &#x33A1;</h5>
+                            <p class="card-text display-6">
+                                @medieRecoltare.ToString("0.00") &#13199;
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-activity"></i> Total Tratamente</h5>
-                            <p class="card-text display-4">@Model.TotalTratamente</p>
+                            <p class="card-text display-6">@Model.TotalTratamente</p>
                         </div>
                     </div>
                 </div>
-               
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-activity"></i> Suprafata Tratamente</h5>
+                            <p class="card-text display-6">@Model.SuprafataTratamente &#x33A1;</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-basket3"></i> Medie Recoltare/Angajat</h5>
+                            <p class="card-text display-6">@medieRecoltareAngajat.ToString("0.00") &#13199</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-moisture"></i> Total Irigari</h5>
+                            <p class="card-text display-6">
+                                @Model.TotalIrigari
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-moisture"></i> Timp Irigari</h5>
+                            <p class="card-text display-6">
+                                @Model.DurataIrigari &#39;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-moisture"></i> Medie Irigare/Angajat</h5>
+                            <p class="card-text display-6">@medieIrigareAngajat.ToString("0.00") &#39;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-eyedropper"></i> Total Fertilizari</h5>
-                            <p class="card-text display-4">@Model.TotalFertilizari</p>
+                            <p class="card-text display-6">@Model.TotalFertilizari</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-eyedropper"></i> Suprafata Fertilizari</h5>
+                            <p class="card-text display-6">@Model.SuprafataFertilizari &#x33A1;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-eyedropper"></i> Medie Fertilizare/Angajat</h5>
+                            <p class="card-text display-6">@medieFertilizareAngajat.ToString("0.00") &#x33A1;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-arrow-bar-up"></i> Numar Palisari</h5>
+                            <p class="card-text display-6">@Model.TotalPalisari</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
                     <div class="card h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-arrow-bar-up"></i> Total Palisari</h5>
-                            <p class="card-text display-4">@Model.TotalPalisari</p>
+                            <p class="card-text display-6">@Model.PlantePalisari</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-arrow-bar-up"></i> Medie Palisare/Angajat</h5>
+                            <p class="card-text display-6">@mediePalisareAngajat.ToString("0.00")</p>
                         </div>
                     </div>
                 </div>
