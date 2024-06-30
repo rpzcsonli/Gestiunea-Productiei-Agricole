@@ -38,9 +38,7 @@ namespace ProiectLicenta.Controllers
                     addTratamentViewModel.Denumire,
                     addTratamentViewModel.Cantitate,
                     addTratamentViewModel.Perioada
-                    
                 );
-
                 context.Tratament.Add(newTratament);
                 context.SaveChanges();
                 return Redirect("/Tratamente");
@@ -63,6 +61,44 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Tratamente");
+        }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var tratament = context.Tratament.Find(id);
+            if (tratament == null)
+            {
+                return NotFound();
+            }
+
+            var editTratamentViewModel = new AddTratamentViewModel
+            {
+                CodTratament = tratament.CodTratament,
+                Denumire = tratament.Denumire,
+                Cantitate = tratament.Cantitate,
+                Perioada = tratament.Perioada
+            };
+
+            return View(editTratamentViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddTratamentViewModel editTratamentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var tratament = context.Tratament.Find(editTratamentViewModel.CodTratament);
+                if (tratament == null)
+                {
+                    return NotFound();
+                }
+
+                tratament.Denumire = editTratamentViewModel.Denumire;
+                tratament.Cantitate = editTratamentViewModel.Cantitate;
+                tratament.Perioada = editTratamentViewModel.Perioada;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {

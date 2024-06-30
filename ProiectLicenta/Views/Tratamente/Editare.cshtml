@@ -1,12 +1,12 @@
 ﻿@using ProiectLicenta.ViewModels;
 @model AddTratamentViewModel;
 @{
-    ViewData["Title"] = "Adaugare Tratamente";
+    ViewData["Title"] = "Editare Tratamente";
 }
-<h1 class=" fw-bold pb-2 pb-xl-3 text-center">Adaugare Tratamente</h1>
+<h1 class=" fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-pencil-fill"></i> Editare Tratamente</h1>
 
 <div>
-    <div asp-controller="Tratamente" asp-action="Adaugare" class="bd-example">
+    <div asp-controller="Tratamente" asp-action="Editare" class="bd-example">
         <a href="@Url.Action("Index","Tratamente")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
         <form method="post">
     
@@ -25,8 +25,10 @@
                 <label for="floatingInput" asp-for="Perioada">Perioada Administrare</label>
                 <span class="text-danger" asp-validation-for="Perioada"></span>
             </div>
-
-            <input class="btn btn-primary" type="submit" value="Adaugare Tratament" />
+            <div>
+                <input type="hidden" asp-for="CodTratament" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Editare Tratament" />
             
 
     </form>

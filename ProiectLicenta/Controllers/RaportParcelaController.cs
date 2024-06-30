@@ -3,12 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
-using System.Linq;
-using System.Collections.Generic;
 using ProiectLicenta.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.SqlClient;
-
 namespace ProiectLicenta.Controllers
 {
     [Authorize]

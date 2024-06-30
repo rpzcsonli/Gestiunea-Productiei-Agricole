@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace ProiectLicenta.Controllers
 {

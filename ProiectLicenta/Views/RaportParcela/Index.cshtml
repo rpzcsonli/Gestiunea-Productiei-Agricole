@@ -11,9 +11,9 @@
 <h1 class="fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-card-list"></i> Raport Parcela</h1>
 
 <div>
-    <input class="btn btn-warning mb-3" type="button" value="Inapoi" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+    <a href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
     <form method="get" action="@Url.Action("Index")">
-        <div class="form-group mb-3">
+        <div class="form-group mt-3 mb-3">
             <select class="form-select form-control-lg" name="parcelaSelectata" asp-items="ViewBag.Parcele">
                 <option value="0" hidden>Alege Parcela</option>
             </select>

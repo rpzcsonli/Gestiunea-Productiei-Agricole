@@ -94,6 +94,48 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruTratamente");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var tratament = context.RegistruTratamente.Find(id);
+            if (tratament == null)
+            {
+                return NotFound();
+            }
+
+            var editRegistruTratamenteViewModel = new AddRegistruTratamenteViewModel
+            {
+                CodTratamentAplicat = tratament.CodTratamentAplicat,
+                CodParcela = tratament.CodParcela,
+                CodDaunator = tratament.CodDaunator,
+                CodAngajat = tratament.CodAngajat,
+                Suprafata = tratament.Suprafata,
+                DataAplicare = tratament.DataAplicare
+            };
+            CheiExterne(editRegistruTratamenteViewModel);
+
+            return View(editRegistruTratamenteViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRegistruTratamenteViewModel editRegistruTratamenteViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var tratament = context.RegistruTratamente.Find(editRegistruTratamenteViewModel.CodTratamentAplicat);
+                if (tratament == null)
+                {
+                    return NotFound();
+                }
+                tratament.CodParcela = editRegistruTratamenteViewModel.CodParcela;
+                tratament.CodDaunator = editRegistruTratamenteViewModel.CodDaunator;
+                tratament.Suprafata = editRegistruTratamenteViewModel.Suprafata;
+                tratament.CodAngajat = editRegistruTratamenteViewModel.CodAngajat;
+                tratament.DataAplicare = editRegistruTratamenteViewModel.DataAplicare;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())

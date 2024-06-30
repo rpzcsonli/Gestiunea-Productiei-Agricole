@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace ProiectLicenta.Controllers
 {
     [Authorize]
@@ -20,10 +17,19 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString)
         {
             ViewBag.SortOrder = sortOrder;
-            List<Parcela> parcela = SortData(context.Parcela.Include(r => r.Rasaduri).ToList(),sortOrder);
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                a.Rasaduri.Denumire.Contains(searchString) ||
+                a.Rasaduri.Planta.Contains(searchString)).ToList();
+                dateParcela = SortData(dateParcela.ToList(), sortOrder);
+                return View(dateParcela);
+            }
+            List<Parcela> parcela = SortData(context.Parcela.Include(r => r.Rasaduri).ToList(), sortOrder);
             return View(parcela);
         }
         public void CheiExterne(AddParcelaViewModel intrare)
@@ -73,10 +79,18 @@ namespace ProiectLicenta.Controllers
             CheiExterne(addParcelaViewModel);
             return View(addParcelaViewModel);
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.Parcela.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                a.Rasaduri.Denumire.Contains(searchString) ||
+                a.Rasaduri.Planta.Contains(searchString)).ToList();
+                return View(dateParcela);
+            }
+            List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ToList();
+            return View(parcela);
         }
         [HttpPost]
         public IActionResult Stergere(int[] parcelaId)
@@ -88,6 +102,66 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Parcele");
+        }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var parcela = context.Parcela.Find(id);
+            if (parcela == null)
+            {
+                return NotFound();
+            }
+
+            var editParcelaViewModel = new AddParcelaViewModel
+            {   
+                CodParcela = parcela.CodParcela,
+                Locatie = parcela.Locatie,
+                Tip = parcela.Tip,
+                CodRasad = parcela.CodRasad,
+                NumarPlante= parcela.NumarPlante,
+                Suprafata = parcela.Suprafata
+            };
+            CheiExterne(editParcelaViewModel);
+
+            return View(editParcelaViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddParcelaViewModel editParcelaViewModel)
+        {
+            CheiExterne(editParcelaViewModel);
+            if (ModelState.IsValid)
+            {
+                var parcela = context.Parcela.Find(editParcelaViewModel.CodParcela);
+                var selectedRasaduri = context.Rasad.Find(editParcelaViewModel.CodRasad);
+                parcela.Locatie = editParcelaViewModel.Locatie;
+                parcela.Tip = editParcelaViewModel.Tip;
+                parcela.CodRasad = editParcelaViewModel.CodRasad;
+                parcela.Suprafata = editParcelaViewModel.Suprafata;
+                if (selectedRasaduri != null && parcela.NumarPlante < editParcelaViewModel.NumarPlante)
+                {
+                    if (selectedRasaduri.Cantitate >= editParcelaViewModel.NumarPlante- parcela.NumarPlante)
+                    {
+                        selectedRasaduri.Cantitate -= editParcelaViewModel.NumarPlante - parcela.NumarPlante;
+                        parcela.NumarPlante = editParcelaViewModel.NumarPlante;
+                        context.SaveChanges();
+                        return Redirect("/Parcele");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Numarul de plante este prea mare!");
+                    }
+                }
+                else 
+                if (selectedRasaduri != null && parcela.NumarPlante >= editParcelaViewModel.NumarPlante)
+                {
+                    selectedRasaduri.Cantitate += parcela.NumarPlante - editParcelaViewModel.NumarPlante;
+                    parcela.NumarPlante = editParcelaViewModel.NumarPlante;
+                    context.SaveChanges();
+                    return Redirect("/Parcele");
+                }
+            }
+            return View(editParcelaViewModel);
         }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {

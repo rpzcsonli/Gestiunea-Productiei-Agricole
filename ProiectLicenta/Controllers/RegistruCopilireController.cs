@@ -87,6 +87,46 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruCopilire");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var copilire = context.RegistruCopilire.Find(id);
+            if (copilire == null)
+            {
+                return NotFound();
+            }
+
+            var editRegistruCopilireViewModel = new AddRegistruCopilireViewModel
+            {
+                CodCopilire=copilire.CodCopilire,
+                CodParcela= copilire.CodParcela,
+                NumarPlante=  copilire.NumarPlante,
+                CodAngajat=  copilire.CodAngajat,
+                DataCopilire=   copilire.DataCopilire
+            };
+            CheiExterne(editRegistruCopilireViewModel);
+
+            return View(editRegistruCopilireViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRegistruCopilireViewModel editRegistruCopilireViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var copilire = context.RegistruCopilire.Find(editRegistruCopilireViewModel.CodCopilire);
+                if (copilire == null)
+                {
+                    return NotFound();
+                }
+                copilire.CodParcela = editRegistruCopilireViewModel.CodParcela;
+                copilire.NumarPlante = editRegistruCopilireViewModel.NumarPlante;
+                copilire.CodAngajat = editRegistruCopilireViewModel.CodAngajat;
+                copilire.DataCopilire = editRegistruCopilireViewModel.DataCopilire;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -17,13 +16,23 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.SortOrder = sortOrder;
-            List<Angajat> angajat = SortData(context.Angajat.ToList(),sortOrder);
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString)) { 
+            List<Angajat> angajati = context.Angajat.Where(a => a.Nume.Contains(searchString) ||
+                                               a.Prenume.Contains(searchString) ||
+                                               a.Functie.Contains(searchString) ||
+                                               a.Telefon.Contains(searchString) ||
+                                               a.Email.Contains(searchString)).ToList(); 
+            angajati = SortData(angajati.ToList(), sortOrder);
+                return View(angajati);
+            }
+                List<Angajat> angajat = SortData(context.Angajat.ToList(), sortOrder);
                 return View(angajat);
+            
         }
-
         [HttpGet]
         public IActionResult Adaugare()
         {
@@ -43,17 +52,26 @@ namespace ProiectLicenta.Controllers
                     addAngajatViewModel.Telefon,
                     addAngajatViewModel.Email
                 );
-
                 context.Angajat.Add(newAngajat);
                 context.SaveChanges();
                 return Redirect("/Angajati");
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.Angajat.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                List<Angajat> angajati = context.Angajat.Where(a => a.Nume.Contains(searchString) ||
+                                                   a.Prenume.Contains(searchString) ||
+                                                   a.Functie.Contains(searchString) ||
+                                                   a.Telefon.Contains(searchString) ||
+                                                   a.Email.Contains(searchString)).ToList();
+
+                return View(angajati);
+            }
+            return View(context.Angajat.ToList());
         }
         [HttpPost]
         public IActionResult Stergere(int[] angajatId)
@@ -67,7 +85,49 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/Angajati");
         }
-        private List<T> SortData<T>(List<T> ListaDate, string Ordine)
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var angajat = context.Angajat.Find(id);
+            if (angajat == null)
+            {
+                return NotFound();
+            }
+
+            var editAngajatViewModel = new AddAngajatViewModel
+            {
+                CodAngajat = angajat.CodAngajat,
+                Nume = angajat.Nume,
+                Prenume = angajat.Prenume,
+                Functie = angajat.Functie,
+                Telefon = angajat.Telefon,
+                Email = angajat.Email
+            };
+
+            return View(editAngajatViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddAngajatViewModel editAngajatViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var angajat = context.Angajat.Find(editAngajatViewModel.CodAngajat);
+                if (angajat == null)
+                {
+                    return NotFound();
+                }
+
+                angajat.Nume = editAngajatViewModel.Nume;
+                angajat.Prenume = editAngajatViewModel.Prenume;
+                angajat.Functie = editAngajatViewModel.Functie;
+                angajat.Telefon = editAngajatViewModel.Telefon;
+                angajat.Email = editAngajatViewModel.Email;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+       private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())
             {
@@ -98,6 +158,5 @@ namespace ProiectLicenta.Controllers
             }
             return ListaDate;
         }
-
     }
 }

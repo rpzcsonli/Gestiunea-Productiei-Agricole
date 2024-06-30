@@ -87,6 +87,46 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruRecoltare");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var recoltare = context.RegistruRecoltare.Find(id);
+            if (recoltare == null)
+            {
+                return NotFound();
+            }
+
+            var editRegistruRecoltareViewModel = new AddRegistruRecoltareViewModel
+            {
+                CodRecoltare = recoltare.CodRecoltare,
+                CodParcela = recoltare.CodParcela,
+                CodAngajat = recoltare.CodAngajat,
+                CantitateRecoltata = recoltare.CantitateRecoltata,
+                DataRecoltare = recoltare.DataRecoltare
+            };
+            CheiExterne(editRegistruRecoltareViewModel);
+
+            return View(editRegistruRecoltareViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRegistruRecoltareViewModel editRegistruRecoltareViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var recoltare = context.RegistruRecoltare.Find(editRegistruRecoltareViewModel.CodRecoltare);
+                if (recoltare == null)
+                {
+                    return NotFound();
+                }
+                recoltare.CodParcela = editRegistruRecoltareViewModel.CodParcela;
+                recoltare.CantitateRecoltata = editRegistruRecoltareViewModel.CantitateRecoltata;
+                recoltare.CodAngajat = editRegistruRecoltareViewModel.CodAngajat;
+                recoltare.DataRecoltare = editRegistruRecoltareViewModel.DataRecoltare;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())

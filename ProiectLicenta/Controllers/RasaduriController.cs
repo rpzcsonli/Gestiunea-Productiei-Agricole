@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -67,6 +65,47 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Rasaduri");
+        }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var rasad = context.Rasad.Find(id);
+            if (rasad == null)
+            {
+                return NotFound();
+            }
+
+            var editRasadViewModel = new AddRasadViewModel
+            {   CodRasad = rasad.CodRasad,   
+                Denumire = rasad.Denumire,
+                   Planta= rasad.Planta,
+                   DataSemanat = rasad.DataSemanat,
+                   DataMaturitate= rasad.DataMaturitate,
+                   Cantitate= rasad.Cantitate
+            };
+
+            return View(editRasadViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRasadViewModel editRasadViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var rasad = context.Rasad.Find(editRasadViewModel.CodRasad);
+                if (rasad == null)
+                {
+                    return NotFound();
+                }
+
+                rasad.Denumire = editRasadViewModel.Denumire;
+                rasad.Planta = editRasadViewModel.Planta;
+                rasad.DataSemanat = editRasadViewModel.DataSemanat;
+                rasad.DataMaturitate = editRasadViewModel.DataMaturitate;
+                rasad.Cantitate = editRasadViewModel.Cantitate;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {

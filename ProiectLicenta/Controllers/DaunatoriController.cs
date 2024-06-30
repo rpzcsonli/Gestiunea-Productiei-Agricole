@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
@@ -18,9 +19,17 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                List<Daunatori> daunatori = context.Daunatori.Include(r => r.Tratament).Where(a => a.Denumire.Contains(searchString) ||
+                a.Tratament.Denumire.Contains(searchString)).ToList();
+                daunatori = SortData(daunatori.ToList(), sortOrder);
+                return View(daunatori);
+            }
             List<Daunatori> daunator = SortData(context.Daunatori.Include(r => r.Tratament).ToList(),sortOrder);
             return View(daunator);
         }
@@ -58,10 +67,16 @@ namespace ProiectLicenta.Controllers
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.Daunatori.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                List<Daunatori> daunatori = context.Daunatori.Include(r => r.Tratament).Where(a => a.Denumire.Contains(searchString) ||
+                a.Tratament.Denumire.Contains(searchString)).ToList();
+                return View(daunatori);
+            }
+            return View(context.Daunatori.Include(r => r.Tratament).ToList());
         }
         [HttpPost]
         public IActionResult Stergere(int[] daunatorId)
@@ -74,6 +89,42 @@ namespace ProiectLicenta.Controllers
             }
             context.SaveChanges();
             return Redirect("/Daunatori");
+        }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var daunator = context.Daunatori.Find(id);
+            if (daunator == null)
+            {
+                return NotFound();
+            }
+
+            var editDaunatorViewModel = new AddDaunatorViewModel
+            {
+                CodDaunator = daunator.CodDaunator,
+                Denumire = daunator.Denumire,
+                CodTratament = daunator.CodTratament
+            };
+            CheiExterne(editDaunatorViewModel);
+
+            return View(editDaunatorViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddDaunatorViewModel editDaunatorViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var daunator = context.Daunatori.Find(editDaunatorViewModel.CodDaunator);
+                if (daunator == null)
+                {
+                    return NotFound();
+                }
+                daunator.Denumire= editDaunatorViewModel.Denumire;
+                daunator.CodTratament = editDaunatorViewModel.CodTratament;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {

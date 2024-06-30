@@ -1,12 +1,12 @@
 ﻿@using ProiectLicenta.ViewModels;
 @model AddRegistruIrigareViewModel;
 @{
-    ViewData["Title"] = "Adaugare Irigare";
+    ViewData["Title"] = "Editare Irigare";
 }
-<h1 class="  fw-bold pb-2 pb-xl-3 text-center">Adaugare Irigare</h1>
+<h1 class="  fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-pencil-fill"></i> Editare Irigare</h1>
 <div>
     <a href="@Url.Action("Index","RegistruIrigare")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
-    <div asp-controller="RegistruIrigare" asp-action="Adaugare" class="form-group">
+    <div asp-controller="RegistruIrigare" asp-action="Editare" class="form-group">
         <form method="post">
             <div class="mb-3 mt-3">
                 <select class="form-select form-control-lg" asp-for="CodParcela" asp-items="ViewBag.codParcela">
@@ -30,7 +30,10 @@
                 <label for="floatingInput" asp-for="DataIrigare">Data Irigare</label>
                 <span class="text-danger" asp-validation-for="DataIrigare"></span>
             </div>
-            <input class="btn btn-primary" type="submit" value="Adaugare Irigare" />
+            <div>
+                <input type="hidden" asp-for="CodIrigare" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Editare Irigare" />
     </form>
 </div>
 </div>

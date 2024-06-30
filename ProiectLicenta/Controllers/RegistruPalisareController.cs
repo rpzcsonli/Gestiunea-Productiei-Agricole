@@ -85,6 +85,46 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruPalisare");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var palisare = context.RegistruPalisare.Find(id);
+            if (palisare == null)
+            {
+                return NotFound();
+            }
+
+            var editRegistruPalisareViewModel = new AddRegistruPalisareViewModel
+            {
+                CodPalisare = palisare.CodPalisare,
+                CodParcela = palisare.CodParcela,
+                NumarPlante = palisare.NumarPlante,
+                CodAngajat = palisare.CodAngajat,
+                DataPalisare = palisare.DataPalisare
+            };
+            CheiExterne(editRegistruPalisareViewModel);
+
+            return View(editRegistruPalisareViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRegistruPalisareViewModel editRegistruPalisareViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var palisare = context.RegistruPalisare.Find(editRegistruPalisareViewModel.CodPalisare);
+                if (palisare == null)
+                {
+                    return NotFound();
+                }
+                palisare.CodParcela = editRegistruPalisareViewModel.CodParcela;
+                palisare.NumarPlante = editRegistruPalisareViewModel.NumarPlante;
+                palisare.CodAngajat = editRegistruPalisareViewModel.CodAngajat;
+                palisare.DataPalisare = editRegistruPalisareViewModel.DataPalisare;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())

@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,7 @@
                         @if (!SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Contact"><i class="bi bi-envelope"></i> Contact</a>
                             </li>
                         }
 
@@ -46,17 +45,17 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <ul class="list-group list-group-flush">
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati">Angajati</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele">Parcele</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri">Rasaduri</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Daunatori">Daunatori</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Tratamente">Tratamente</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruCopilire">Registru Copilire</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruFertilizare">Registru Fertilizare</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruIrigare">Registru Irigare</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruPalisare">Registru Palisare</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruRecoltare">Registru Recoltare</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruTratamente">Registru Tratamente</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Angajati" asp-action="Index"><i class="bi bi-person"></i> Angajati</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Parcele" asp-action="Index"><i class="bi bi-layout-wtf"></i> Parcele</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Rasaduri" asp-action="Index"><i class="bi bi-flower2"></i> Rasaduri</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Daunatori" asp-action="Index"><i class="bi bi-bug-fill"></i> Daunatori</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="Tratamente" asp-action="Index"><i class="bi bi-activity"></i>Tratamente</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruCopilire" asp-action="Index"><i class="bi bi-arrows-expand"></i> Registru Copilire</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruFertilizare" asp-action="Index"><i class="bi bi-eyedropper"></i> Registru Fertilizare</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruIrigare" asp-action="Index"><i class="bi bi-moisture"></i> Registru Irigare</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruPalisare" asp-action="Index"><i class="bi bi-arrow-bar-up"></i> Registru Palisare</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruRecoltare" asp-action="Index"><i class="bi bi-basket3"></i> Registru Recoltare</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RegistruTratamente" asp-action="Index"><i class="bi bi-activity"></i> Registru Tratamente</a>
                                         </ul>
                                     </div>
                                 </li>
@@ -69,9 +68,9 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <ul class="list-group list-group-flush">
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportAngajati">Raport Angajati</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportParcela">Raport Parcela</a>
-                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportRasad">Raport Rasaduri</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportAngajati" asp-action="Index"><i class="bi bi-person"></i> Raport Angajati</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportParcela" asp-action="Index"><i class="bi bi-layout-wtf"></i> Raport Parcela</a>
+                                            <a class="dropdown-item list-group-item list-group-item-action list-group-item-light text-center" asp-controller="RaportRasad" asp-action="Index"><i class="bi bi-flower2"></i> Raport Rasaduri</a>
                                         </ul>
                                     </div>
                                 </li>
@@ -79,11 +78,12 @@
                             </ul>
                         }
                 </div>
-                <div class="navbar-collapse collapse justify-content-end">
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <ul class="navbar-nav ">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item" style="">
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person-badge-fill"></i> @User.Identity?.Name</a>
                             </li>
                             <li class="nav-item">
@@ -95,10 +95,10 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Inregistrare</a>
+                                <a class="nav-link text-secondary" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-add"></i> Inregistrare</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Conectare</a>
+                                <a class="nav-link text-success" asp-area="Identity" asp-page="/Account/Login"><i class="bi bi-file-person"></i> Conectare</a>
                             </li>
                         }
                     </ul>
@@ -117,7 +117,7 @@
             &copy; 2024 - MilianaAgro @if (!SignInManager.IsSignedIn(User))
             {
                 <span>-</span>
-
+                <i class="bi bi-envelope"></i>
                 <a asp-controller="Home" asp-action="Contact"> Contact </a>
             }
         </div>

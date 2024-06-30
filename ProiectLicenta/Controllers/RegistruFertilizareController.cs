@@ -85,6 +85,46 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruFertilizare");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var fertilizare = context.RegistruFertilizare.Find(id);
+            if (fertilizare == null)
+            {
+                return NotFound();
+            }
+
+            var editRegistruFertilizareViewModel = new AddRegistruFertilizareViewModel
+            {
+                CodFertilizare = fertilizare.CodFertilizare,
+                CodParcela = fertilizare.CodParcela,
+                Suprafata = fertilizare.Suprafata,
+                CodAngajat = fertilizare.CodAngajat,
+                DataFertilizare = fertilizare.DataFertilizare
+            };
+            CheiExterne(editRegistruFertilizareViewModel);
+
+            return View(editRegistruFertilizareViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Editare(AddRegistruFertilizareViewModel editRegistruFertilizareViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var fertilizare = context.RegistruFertilizare.Find(editRegistruFertilizareViewModel.CodFertilizare);
+                if (fertilizare == null)
+                {
+                    return NotFound();
+                }
+                fertilizare.CodParcela = editRegistruFertilizareViewModel.CodParcela;
+                fertilizare.Suprafata = editRegistruFertilizareViewModel.Suprafata;
+                fertilizare.CodAngajat = editRegistruFertilizareViewModel.CodAngajat;
+                fertilizare.DataFertilizare = editRegistruFertilizareViewModel.DataFertilizare;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())

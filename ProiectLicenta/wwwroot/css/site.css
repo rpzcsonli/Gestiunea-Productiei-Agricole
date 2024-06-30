@@ -83,7 +83,10 @@ td {
     padding: 1rem;
     border-radius: 0.5rem;
 }
-
+.fit-content {
+    width: 8rem;
+    white-space: nowrap;
+}
 @media only screen and (max-width: 480px) {
     .tablemobile {
         overflow-x: auto;

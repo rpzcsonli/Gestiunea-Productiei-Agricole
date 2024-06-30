@@ -85,6 +85,43 @@ namespace ProiectLicenta.Controllers
             context.SaveChanges();
             return Redirect("/RegistruIrigare");
         }
+        [HttpGet]
+        public IActionResult Editare(int id)
+        {
+            var irigare = context.RegistruIrigare.Find(id);
+            if (irigare == null)
+            {
+                return NotFound();
+            }
+            var editRegistruIrigareViewModel = new AddRegistruIrigareViewModel
+            {
+                CodIrigare = irigare.CodIrigare,
+                CodParcela = irigare.CodParcela,
+                DurataIrigare = irigare.DurataIrigare,
+                CodAngajat = irigare.CodAngajat,
+                DataIrigare = irigare.DataIrigare
+            };
+            CheiExterne(editRegistruIrigareViewModel);
+            return View(editRegistruIrigareViewModel);
+        }
+        [HttpPost]
+        public IActionResult Editare(AddRegistruIrigareViewModel editRegistruIrigareViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var irigare = context.RegistruIrigare.Find(editRegistruIrigareViewModel.CodIrigare);
+                if (irigare == null)
+                {
+                    return NotFound();
+                }
+                irigare.CodParcela = editRegistruIrigareViewModel.CodParcela;
+                irigare.DurataIrigare = editRegistruIrigareViewModel.DurataIrigare;
+                irigare.CodAngajat = editRegistruIrigareViewModel.CodAngajat;
+                irigare.DataIrigare = editRegistruIrigareViewModel.DataIrigare;
+                context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         private List<T> SortData<T>(List<T> ListaDate, string Ordine)
         {
             if (ListaDate == null || !ListaDate.Any())
