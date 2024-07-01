@@ -17,7 +17,8 @@
         public int PlantePalisari { get; set; }
         public int TotalRecoltari { get; set; }
         public int CantitateRecoltari { get; set; }
-
+        public int TotalCopiliri {  get; set; }
+        public int PlanteCopilite { get; set; }
 
     }
     

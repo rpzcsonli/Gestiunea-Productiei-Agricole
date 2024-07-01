@@ -34,6 +34,8 @@ namespace ProiectLicenta.Controllers
             var plantePalisari = context.RegistruPalisare.Sum(p => p.NumarPlante);
             var totalRecoltari = context.RegistruRecoltare.Count();
             var cantitateRecoltari = context.RegistruRecoltare.Sum(p => p.CantitateRecoltata);
+            var totalCopiliri = context.RegistruCopilire.Count();
+            var numarCopiliri = context.RegistruCopilire.Sum(p => p.NumarPlante);
 
             var statisticiViewModel = new StatisticiViewModel
             {
@@ -51,7 +53,9 @@ namespace ProiectLicenta.Controllers
                 TotalPalisari = totalPalisari,
                 PlantePalisari = plantePalisari,
                 TotalRecoltari= totalRecoltari,
-                CantitateRecoltari = cantitateRecoltari
+                CantitateRecoltari = cantitateRecoltari,
+                TotalCopiliri = totalCopiliri,
+                PlanteCopilite = numarCopiliri
             };
 
             return View(statisticiViewModel);

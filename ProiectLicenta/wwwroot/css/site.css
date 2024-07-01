@@ -93,3 +93,6 @@ td {
         display: block;
     }
 }
+.row {
+    margin-left:0px;
+}

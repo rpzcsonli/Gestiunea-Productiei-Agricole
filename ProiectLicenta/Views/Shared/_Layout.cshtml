@@ -14,8 +14,8 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar  navbar-fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 shadow-sm" style="padding: 0.1rem;">
-            <div class="container-fluid ">
+        <nav class="navbar  navbar-fixed-top navbar-expand-md navbar-light border-bottom box-shadow mb-3 shadow-sm" style="padding: 0.1rem;">
+            <div class="container-fluid">
                 <a class="navbar-brand justify-content-start" style="padding:0px" asp-area="" asp-controller="Home" asp-action="Index">
                     <img height="65rpm" width="100%" src="~/Poze/milianaagro-transparent.svg" alt="MilianaAgro Logo" />
                 </a>
@@ -23,15 +23,15 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-start">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="bi bi-house"></i> Acasa</a>
+                            <a class="nav-link fs-5" asp-controller="Home" asp-action="Index"><i class="bi bi-house"></i> Acasa</a>
                         </li>
                         @if (!SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Contact"><i class="bi bi-envelope"></i> Contact</a>
+                                <a class="nav-link fs-5" asp-controller="Home" asp-action="Contact"><i class="bi bi-envelope"></i> Contact</a>
                             </li>
                         }
 
@@ -40,7 +40,7 @@
                             <ul class="navbar-nav">
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-journal-text"></i> Date
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -63,7 +63,7 @@
                             <ul class="navbar-nav justify-content-end">
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-card-list"></i> Rapoarte
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -79,26 +79,26 @@
                         }
                 </div>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-end">
                     <ul class="navbar-nav ">
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person-badge-fill"></i> @User.Identity?.Name</a>
+                                <a class="nav-link fs-5" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person-badge-fill"></i> @User.Identity?.Name</a>
                             </li>
                             <li class="nav-item">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link btn-outline-danger "><i class="bi bi-power"></i> Deconectare</button>
+                                <form class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link btn-outline-danger fs-5"><i class="bi bi-power"></i> Deconectare</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-secondary" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-add"></i> Inregistrare</a>
+                                <a class="nav-link text-secondary fs-5" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-add"></i> Inregistrare</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-success" asp-area="Identity" asp-page="/Account/Login"><i class="bi bi-file-person"></i> Conectare</a>
+                                <a class="nav-link text-success fs-5" asp-area="Identity" asp-page="/Account/Login"><i class="bi bi-file-person"></i> Conectare</a>
                             </li>
                         }
                     </ul>

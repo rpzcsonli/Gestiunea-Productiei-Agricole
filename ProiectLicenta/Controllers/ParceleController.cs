@@ -40,11 +40,11 @@ namespace ProiectLicenta.Controllers
         }
         public void CheiExterne(AddParcelaViewModel intrare)
         {
-            var codRasad = context.Rasad.OrderBy(p => p.Denumire).ToList();
+            var codRasad = context.Rasad.Where(p=>p.Cantitate!=0).OrderBy(p => p.Denumire).ToList();
             ViewBag.codRasad = codRasad.Select(p => new SelectListItem
             {
                 Value = p.CodRasad.ToString(),
-                Text = p.Planta + "-" +p.Denumire,
+                Text = p.Planta + "-" +p.Denumire + "-" +p.Cantitate + "Buc",
                 Selected = p.CodRasad == intrare.CodRasad,
             });
         }
