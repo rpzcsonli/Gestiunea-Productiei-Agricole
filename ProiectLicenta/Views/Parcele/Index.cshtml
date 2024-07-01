@@ -5,12 +5,11 @@
     string currentSort = ViewBag.SortOrder != null ? ViewBag.SortOrder : "";
     string filtru = ViewBag.CurrentFilter != null ? ViewBag.CurrentFilter : "";
 }
-
 <h1 class="  fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-layout-wtf"></i> Parcele </h1>
 <div class="mb-3">
-    <a class="me-3" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
-    <a class="" asp-controller="Parcele" asp-action="Adaugare"><i class="bi bi-plus-square-fill link-primary h1"></i></a>
-    <a class="float-end" asp-controller="Parcele" asp-action="Stergere"><i class="bi bi-trash-fill link-danger h1"></i></a>
+    <a class="btn btn-warning me-3" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left"></i> Inapoi</a>
+    <a class="btn btn-primary" asp-controller="Parcele" asp-action="Adaugare"><i class="bi bi-plus-lg"></i> Adaugare</a>
+    <a class="btn btn-danger float-end" asp-controller="Parcele" asp-action="Stergere"><i class="bi bi-trash3"></i> Stergere</a>
 </div>
 <div class="mb-3">
     <form class="d-flex" asp-action="Index" method="get">

@@ -13,13 +13,12 @@ namespace ProiectLicenta.ViewModels
         public string Tip { get; set; }
         public int Suprafata { get; set; }
         public int NumarPlante { get; set; }
-
-        public virtual List<RegistruCopilireDate> RegistruCopilire { get; set; }
-        public virtual List<RegistruFertilizareDate> RegistruFertilizare { get; set; }
-        public virtual List<RegistruIrigareDate> RegistruIrigare { get; set; }
-        public virtual List<RegistruPalisareDate> RegistruPalisare { get; set; }
-        public virtual List<RegistruRecoltareDate> RegistruRecoltare { get; set; }
-        public virtual List<RegistruTratamenteDate> RegistruTratamente { get; set; }
+        public virtual List<RegistruCopilire> RegistruCopilire { get; set; }
+        public virtual List<RegistruFertilizare> RegistruFertilizare { get; set; }
+        public virtual List<RegistruIrigare> RegistruIrigare { get; set; }
+        public virtual List<RegistruPalisare> RegistruPalisare { get; set; }
+        public virtual List<RegistruRecoltare> RegistruRecoltare { get; set; }
+        public virtual List<RegistruTratamente> RegistruTratamente { get; set; }
     }
 
 }

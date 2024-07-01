@@ -3,7 +3,7 @@
 @{ViewData["Title"] = "Adaugare Rasaduri";}
 <h1 class="  fw-bold pb-2 pb-xl-3 text-center">Adaugare Rasaduri</h1>
 <div>
-    <a href="@Url.Action("Index", "Rasaduri")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
+    <a class="btn btn-warning me-3" href="@Url.Action("Index", "Rasaduri")"><i class="bi bi-arrow-left"></i> Inapoi</a>
     <div asp-controller="Rasaduri" asp-action="Adaugare" class="bd-example">
     <form method="post">
             <div class=" form-floating mt-3 mb-3">

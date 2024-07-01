@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
@@ -18,9 +19,25 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString)
         {
             ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString) || a.Suprafata == index).ToList(), sortOrder);
+                    return View(datetratamente);
+                }
+                else
+                {
+                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString)).ToList(), sortOrder);
+                    return View(datetratamente);
+                }
+            }
             List<RegistruTratamente> registruTratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).ToList(), sortOrder);
             return View(registruTratamente);
         }
@@ -77,10 +94,26 @@ namespace ProiectLicenta.Controllers
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.RegistruTratamente.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruTratamente> datetratamente = context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString) || a.Suprafata == index).ToList();
+                    return View(datetratamente);
+                }
+                else
+                {
+                    List<RegistruTratamente> datetratamente = context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString)).ToList();
+                    return View(datetratamente);
+                }
+            }
+            List<RegistruTratamente> registruTratamente = context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).ToList();
+            return View(registruTratamente);
         }
         [HttpPost]
         public IActionResult Stergere(int[] registruTratamenteId)

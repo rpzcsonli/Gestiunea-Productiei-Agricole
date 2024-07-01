@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -15,10 +17,24 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString)
         {
             ViewBag.SortOrder = sortOrder;
-            List<Rasaduri> rasad = SortData(context.Rasad.ToList(),sortOrder);
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<Rasaduri> dateRasaduri = SortData(context.Rasad.Where(a => a.Denumire.Contains(searchString) || a.Planta.Contains(searchString) || a.Cantitate == index).ToList(), sortOrder);
+                    return View(dateRasaduri);
+                }
+                else
+                {
+                    List<Rasaduri> dateRasaduri = SortData(context.Rasad.Where(a => a.Denumire.Contains(searchString) || a.Planta.Contains(searchString)).ToList(), sortOrder);
+                    return View(dateRasaduri);
+                }
+            }
+            List<Rasaduri> rasad = SortData(context.Rasad.ToList(), sortOrder);
             return View(rasad);
         }
        
@@ -49,10 +65,24 @@ namespace ProiectLicenta.Controllers
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString )
         {
-            ViewBag.stergere = context.Rasad.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<Rasaduri> dateRasaduri = context.Rasad.Where(a => a.Denumire.Contains(searchString) || a.Planta.Contains(searchString) || a.Cantitate == index).ToList();
+                    return View(dateRasaduri);
+                }
+                else
+                {
+                    List<Rasaduri> dateRasaduri = context.Rasad.Where(a => a.Denumire.Contains(searchString) || a.Planta.Contains(searchString)).ToList();
+                    return View(dateRasaduri);
+                }
+            }
+            List<Rasaduri> Rasaduri = context.Rasad.ToList();
+            return View(Rasaduri);
         }
         [HttpPost]
         public IActionResult Stergere(int[] rasadId)

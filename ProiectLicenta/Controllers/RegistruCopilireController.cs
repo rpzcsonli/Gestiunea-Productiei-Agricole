@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
@@ -18,13 +19,28 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString)
         {
             ViewBag.SortOrder = sortOrder;
-            List<RegistruCopilire> registruCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).ToList(),sortOrder);
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.NumarPlante == index).ToList(), sortOrder);
+                    return View(dateCopilire);
+                }
+                else
+                {
+                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
+                    return View(dateCopilire);
+                }
+            }
+            List<RegistruCopilire> registruCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).ToList(), sortOrder);
             return View(registruCopilire);
         }
-        
         public void CheiExterne(AddRegistruCopilireViewModel intrare)
         {
             var codAngajat = context.Angajat.OrderBy(p => p.Nume).ToList();
@@ -42,7 +58,6 @@ namespace ProiectLicenta.Controllers
                 Selected = p.CodParcela == intrare.CodParcela,
             });
         }
-
         [HttpGet]
         public IActionResult Adaugare()
         {
@@ -63,17 +78,32 @@ namespace ProiectLicenta.Controllers
                     addRegistruCopilireViewModel.CodAngajat,
                     addRegistruCopilireViewModel.DataCopilire
                 );
-
                 context.RegistruCopilire.Add(newRegistruCopilire);
                 context.SaveChanges();
                 return Redirect("/RegistruCopilire");
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.RegistruCopilire.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruCopilire> dateCopilire = context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.NumarPlante == index).ToList();
+                    return View(dateCopilire);
+                }
+                else
+                {
+                    List<RegistruCopilire> dateCopilire = context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList();
+                    return View(dateCopilire);
+                }
+            }
+            List<RegistruCopilire> registruCopilire = context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).ToList();
+            return View(registruCopilire);
         }
         [HttpPost]
         public IActionResult Stergere(int[] registruCopilireId)

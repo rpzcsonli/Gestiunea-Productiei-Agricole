@@ -2,8 +2,8 @@
 @{
     ViewData["Title"] = "Stergere Angajati";
 }
-<h1 class="  fw-bold pb-2 pb-xl-3 text-center">Sterge Angajati</h1>
-<a href="@Url.Action("Index", "Angajati")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
+<h1 class="  fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-trash3"></i> Sterge Angajati</h1>
+<a class="btn btn-warning me-3" href="@Url.Action("Index", "Angajati")"><i class="bi bi-arrow-left"></i> Inapoi</a>
 <div class="mb-3 mt-3">
     <form class="d-flex" asp-action="Stergere" method="get">
         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
@@ -15,7 +15,7 @@
     <div class="mt-3">
         @if (Model.Count == 0)
         {
-            <p>Nu exista angajati!</p>
+            <p>Nu exista Angajati!</p>
         }
         else
         {

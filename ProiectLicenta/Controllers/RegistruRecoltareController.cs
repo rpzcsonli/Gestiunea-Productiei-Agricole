@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
@@ -19,9 +20,25 @@ namespace ProiectLicenta.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.CantitateRecoltata == index).ToList(), sortOrder);
+                    return View(dateRecoltare);
+                }
+                else
+                {
+                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
+                    return View(dateRecoltare);
+                }
+            }
             List<RegistruRecoltare> registruRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).Include(r => r.Angajat).ToList(),sortOrder);
             return View(registruRecoltare);
         }
@@ -70,10 +87,26 @@ namespace ProiectLicenta.Controllers
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.RegistruRecoltare.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<RegistruRecoltare> dateRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.CantitateRecoltata == index).ToList();
+                    return View(dateRecoltare);
+                }
+                else
+                {
+                    List<RegistruRecoltare> dateRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                 a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList();
+                    return View(dateRecoltare);
+                }
+            }
+            List<RegistruRecoltare> registruRecoltare = context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).Include(r => r.Angajat).ToList();
+            return View(registruRecoltare);
         }
         [HttpPost]
         public IActionResult Stergere(int[] registruRecoltareId)

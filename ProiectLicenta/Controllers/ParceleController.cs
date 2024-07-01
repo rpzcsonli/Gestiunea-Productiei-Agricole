@@ -22,12 +22,18 @@ namespace ProiectLicenta.Controllers
             ViewBag.SortOrder = sortOrder;
             ViewBag.CurrentFilter = searchString;
             if (!string.IsNullOrEmpty(searchString))
-            {
-                List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
-                a.Rasaduri.Denumire.Contains(searchString) ||
-                a.Rasaduri.Planta.Contains(searchString)).ToList();
-                dateParcela = SortData(dateParcela.ToList(), sortOrder);
-                return View(dateParcela);
+            {if (int.TryParse(searchString, out int index))
+                {
+                    List<Parcela> dateParcela = SortData(context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                    a.Rasaduri.Denumire.Contains(searchString) || a.Rasaduri.Planta.Contains(searchString) || a.NumarPlante == index || a.Suprafata == index).ToList(), sortOrder);
+                    return View(dateParcela);
+                }
+                else
+                {
+                    List<Parcela> dateParcela = SortData(context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                    a.Rasaduri.Denumire.Contains(searchString) || a.Rasaduri.Planta.Contains(searchString)).ToList(), sortOrder);
+                    return View(dateParcela);
+                }
             }
             List<Parcela> parcela = SortData(context.Parcela.Include(r => r.Rasaduri).ToList(), sortOrder);
             return View(parcela);
@@ -84,10 +90,18 @@ namespace ProiectLicenta.Controllers
             ViewBag.CurrentFilter = searchString;
             if (!string.IsNullOrEmpty(searchString))
             {
-                List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
-                a.Rasaduri.Denumire.Contains(searchString) ||
-                a.Rasaduri.Planta.Contains(searchString)).ToList();
-                return View(dateParcela);
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                    a.Rasaduri.Denumire.Contains(searchString) || a.Rasaduri.Planta.Contains(searchString) || a.NumarPlante == index || a.Suprafata == index).ToList();
+                    return View(dateParcela);
+                }
+                else
+                {
+                    List<Parcela> dateParcela = context.Parcela.Include(r => r.Rasaduri).Where(a => a.Locatie.Contains(searchString) || a.Tip.Contains(searchString) ||
+                    a.Rasaduri.Denumire.Contains(searchString) || a.Rasaduri.Planta.Contains(searchString)).ToList();
+                    return View(dateParcela);
+                }
             }
             List<Parcela> parcela = context.Parcela.Include(r => r.Rasaduri).ToList();
             return View(parcela);

@@ -1,17 +1,14 @@
 ﻿@using ProiectLicenta.ViewModels
 @model IEnumerable<RaportRasad>
-    
 @{
-    ViewData["Title"] = "Raport Rasad";
+    ViewData["Title"] = "Raport Rasaduri";
     string currentSort = ViewBag.SortOrder != null ? ViewBag.SortOrder : "";
     int rasadSelectat = ViewBag.RasadSelectata != null ? (int)ViewBag.RasadSelectata : 0;
     string registruSelectat = ViewBag.RegistruSelectat as string;
 }
-
-<h1 class="fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-card-list"></i> Raport Rasad</h1>
-
+<h1 class="fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-card-list"></i> Raport Rasaduri</h1>
 <div>
-    <a href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
+    <a class="btn btn-warning me-3" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left"></i> Inapoi</a>
 
     <form method="get" action="@Url.Action("Index")">
         <div class="form-group mt-3 mb-3">
@@ -30,7 +27,7 @@
     @if (Model != null && Model.Any())
     {
         var rasad = Model.FirstOrDefault();
-        <h2 class="mb-3 text-center">Rezultate - @rasad.Denumire - @rasad.Planta</h2>
+        <h2 class="mb-3 text-center">Rezultate: @rasad.Planta - @rasad.Denumire</h2>
         <div class="container">
             <div class="row justify-content-center">
                 @foreach (var item in Model)
@@ -78,7 +75,7 @@
                                                 </a>
                                             </th>
                                             <th>
-                                                Cod Parcela
+                                                Parcela
                                                 <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                                     @if (currentSort != "CodParcela_desc")
                                                     {
@@ -123,7 +120,7 @@
                                         {
                                             <tr>
                                                 <td>@registru.CodCopilire</td>
-                                                <td>@registru.CodParcela</td>
+                                                <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
                                                 <td>@registru.NumarPlante</td>
                                                 <td>@registru.DataCopilire.ToString("dd/MM/yyyy")</td>
                                             </tr>
@@ -152,7 +149,7 @@
                                                 </a>
                                             </th>
                                             <th>
-                                                Cod Parcela
+                                                Parcela
                                                 <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                                     @if (currentSort != "CodParcela_desc")
                                                     {
@@ -197,7 +194,7 @@
                                         {
                                             <tr>
                                                 <td>@registru.CodFertilizare</td>
-                                                <td>@registru.CodParcela</td>
+                                        <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
                                         <td>@registru.Suprafata &#x33A1;</td>
                                                 <td>@registru.DataFertilizare.ToString("dd/MM/yyyy")</td>
                                             </tr>
@@ -226,7 +223,7 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Cod Parcela
+                                        Parcela
                                         <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                             @if (currentSort != "CodParcela_desc")
                                             {
@@ -270,9 +267,9 @@
                                 @foreach (var registru in item.RegistruIrigare)
                                         {
                                             <tr>
-                                                <td>@registru.CodIrigare</td>
-                                                <td>@registru.CodParcela</td>
-                                                <td>@registru.DurataIrigare</td>
+                                                <td>@registru.CodIrigare</td>   
+                                        <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
+                                        <td>@registru.DurataIrigare</td>
                                                 <td>@registru.DataIrigare.ToString("dd/MM/yyyy")</td>
                                             </tr>
                                         }
@@ -300,7 +297,7 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Cod Parcela
+                                        Parcela
                                         <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                             @if (currentSort != "CodParcela_desc")
                                             {
@@ -345,8 +342,8 @@
                                         {
                                             <tr>
                                                 <td>@registru.CodPalisare</td>
-                                                <td>@registru.CodParcela</td>
-                                                <td>@registru.NumarPlante</td>
+                                        <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
+                                        <td>@registru.NumarPlante</td>
                                                 <td>@registru.DataPalisare.ToString("dd/MM/yyyy")</td>
                                             </tr>
                                         }
@@ -374,7 +371,7 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Cod Parcela
+                                        Parcela
                                         <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                             @if (currentSort != "CodParcela_desc")
                                             {
@@ -419,8 +416,8 @@
                                         {
                                             <tr>
                                                 <td>@registru.CodRecoltare</td>
-                                                <td>@registru.CodParcela</td>
-                                                <td>@registru.CantitateRecoltata</td>
+                                        <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
+                                        <td>@registru.CantitateRecoltata</td>
                                                 <td>@registru.DataRecoltare.ToString("dd/MM/yyyy")</td>
                                             </tr>
                                         }
@@ -449,7 +446,7 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Cod Parcela
+                                        Parcela
                                         <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodParcela" ? "CodParcela_desc" : "CodParcela" })">
                                                 @if (currentSort != "CodParcela_desc")
                                                 {
@@ -462,7 +459,7 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Cod Daunator
+                                        Daunator
                                         <a href="@Url.Action("Index", new { rasadSelectat, registruSelectat, sortOrder = currentSort == "CodDaunator" ? "CodDaunator_desc" : "CodDaunator" })">
                                                 @if (currentSort != "CodDaunator_desc")
                                                 {
@@ -508,8 +505,8 @@
                                         {
                                             <tr>
                                                 <td>@registru.CodTratamentAplicat</td>
-                                                <td>@registru.CodParcela</td>
-                                                <td>@registru.CodDaunator</td>
+                                        <td>@registru.CodParcela - @registru.Parcela.Locatie</td>
+                                        <td>@registru.Daunatori.Denumire</td>
                                         <td>@registru.Suprafata &#x33A1;</td>
                                                 <td>@registru.DataAplicare.ToString("dd/MM/yyyy")</td>
                                             </tr>

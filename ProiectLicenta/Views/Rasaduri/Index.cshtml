@@ -3,12 +3,19 @@
 @{
     ViewData["Title"] = "Rasaduri";
     string currentSort = ViewBag.SortOrder != null ? ViewBag.SortOrder : "";
+    string filtru = ViewBag.CurrentFilter != null ? ViewBag.CurrentFilter : "";
 }
 <h1 class="  fw-bold pb-2 pb-xl-3 text-center"><i class="bi bi-flower2"></i> Rasaduri </h1>
 <div class="mb-3">
-    <a class="me-3" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left-square-fill link-warning h1"></i></a>
-    <a class="" asp-controller="Rasaduri" asp-action="Adaugare"><i class="bi bi-plus-square-fill link-primary h1"></i></a>
-    <a class="float-end" asp-controller="Rasaduri" asp-action="Stergere"><i class="bi bi-trash-fill link-danger h1"></i></a>
+    <a class="btn btn-warning me-3" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left"></i> Inapoi</a>
+    <a class="btn btn-primary" asp-controller="Rasaduri" asp-action="Adaugare"><i class="bi bi-plus-lg"></i> Adaugare</a>
+    <a class="btn btn-danger float-end" asp-controller="Rasaduri" asp-action="Stergere"><i class="bi bi-trash3"></i> Stergere</a>
+</div>
+<div class="mb-3">
+    <form class="d-flex" asp-action="Index" method="get">
+        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+        <input class="form-control ms-2" type="search" placeholder="Cautare" aria-label="Cautare" name="searchString" value="@ViewBag.CurrentFilter">
+    </form>
 </div>
 <div>
 @if (Model.Count == 0)
@@ -21,7 +28,7 @@ else
         <tr>
                 <th colspan="2" class="fit-content">
                     Nr.
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "CodRasad" ? "CodRasad_desc" : "CodRasad" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "CodRasad" ? "CodRasad_desc" : "CodRasad",searchString = filtru })">
                         @if (currentSort != "CodRasad_desc")
                         {
                             <i class="bi bi-sort-up"></i>
@@ -34,7 +41,7 @@ else
                 </th>
                 <th>
                     Denumire
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Denumire" ? "Denumire_desc" : "Denumire" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Denumire" ? "Denumire_desc" : "Denumire",searchString = filtru })">
                         @if (currentSort != "Denumire_desc")
                         {
                             <i class="bi bi-sort-up"></i>
@@ -47,7 +54,7 @@ else
                 </th>
                 <th>
                     Planta
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Planta" ? "Planta_desc" : "Planta" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Planta" ? "Planta_desc" : "Planta",searchString = filtru })">
                         @if (currentSort != "Planta_desc")
                         {
                             <i class="bi bi-sort-up"></i>
@@ -60,7 +67,7 @@ else
                 </th>
                 <th>
                     Data Semanat
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "DataSemanat" ? "DataSemanat_desc" : "DataSemanat" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "DataSemanat" ? "DataSemanat_desc" : "DataSemanat",searchString = filtru })">
                         @if (currentSort != "DataSemanat_desc")
                         {
                             <i class="bi bi-sort-up"></i>
@@ -73,7 +80,7 @@ else
                 </th>
                 <th>
                     Data Maturitate
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "DataMaturitate" ? "DataMaturitate_desc" : "DataMaturitate" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "DataMaturitate" ? "DataMaturitate_desc" : "DataMaturitate",searchString = filtru })">
                         @if (currentSort != "DataMaturitate_desc")
                         {
                             <i class="bi bi-sort-up"></i>
@@ -86,7 +93,7 @@ else
                 </th>
                 <th>
                     Numar de Plante
-                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Cantitate" ? "Cantitate_desc" : "Cantitate" })">
+                    <a href="@Url.Action("Index", new {sortOrder = currentSort == "Cantitate" ? "Cantitate_desc" : "Cantitate",searchString = filtru })">
                         @if (currentSort != "Cantitate_desc")
                         {
                             <i class="bi bi-sort-up"></i>

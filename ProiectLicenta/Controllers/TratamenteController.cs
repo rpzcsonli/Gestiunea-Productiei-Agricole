@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using ProiectLicenta.Data;
 using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
@@ -15,10 +16,24 @@ namespace ProiectLicenta.Controllers
             this.context = dbcontext;
         }
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString)
         {
             ViewBag.SortOrder = sortOrder;
-            List<Tratament> tratament = SortData(context.Tratament.ToList(),sortOrder);
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<Tratament> dateTratament = SortData(context.Tratament.Where(a => a.Denumire.Contains(searchString) || a.Cantitate == index || a.Perioada == index).ToList(), sortOrder);
+                    return View(dateTratament);
+                }
+                else
+                {
+                    List<Tratament> dateTratament = SortData(context.Tratament.Where(a => a.Denumire.Contains(searchString)).ToList(), sortOrder);
+                    return View(dateTratament);
+                }
+            }
+            List<Tratament> tratament = SortData(context.Tratament.ToList(), sortOrder);
             return View(tratament);
         }
 
@@ -45,10 +60,24 @@ namespace ProiectLicenta.Controllers
             }
             return Adaugare();
         }
-        public IActionResult Stergere()
+        public IActionResult Stergere(string searchString)
         {
-            ViewBag.stergere = context.Tratament.ToList();
-            return View();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (int.TryParse(searchString, out int index))
+                {
+                    List<Tratament> dateTratament = context.Tratament.Where(a => a.Denumire.Contains(searchString) || a.Cantitate == index || a.Perioada == index).ToList();
+                    return View(dateTratament);
+                }
+                else
+                {
+                    List<Tratament> dateTratament = context.Tratament.Where(a => a.Denumire.Contains(searchString)).ToList();
+                    return View(dateTratament);
+                }
+            }
+            List<Tratament> tratament = context.Tratament.ToList();
+            return View(tratament);
         }
         [HttpPost]
         public IActionResult Stergere(int[] tratamentId)
@@ -81,7 +110,6 @@ namespace ProiectLicenta.Controllers
 
             return View(editTratamentViewModel);
         }
-
         [HttpPost]
         public IActionResult Editare(AddTratamentViewModel editTratamentViewModel)
         {
