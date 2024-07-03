@@ -13,6 +13,9 @@ namespace ProiectLicenta.ViewModels
         public string Tip { get; set; }
         public int Suprafata { get; set; }
         public int NumarPlante { get; set; }
+        public bool filtrareData { get; set; }
+        public DateTime DataInceput { get; set; }
+        public DateTime DataSfarsit { get; set; }
         public virtual List<RegistruCopilire> RegistruCopilire { get; set; }
         public virtual List<RegistruFertilizare> RegistruFertilizare { get; set; }
         public virtual List<RegistruIrigare> RegistruIrigare { get; set; }
