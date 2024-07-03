@@ -3,13 +3,17 @@
 
 // Write your JavaScript code.
     function downloadTableAsHtml() {
-            var table = document.getElementById("registruTable").outerHTML;
+        var table = document.getElementById("registruTable").outerHTML;
+        var titlu = document.querySelector('h1');
+        var raport = document.querySelector('h4');
+
+
     var htmlContent = `
     <!DOCTYPE html>
     <html>
         <head>
             <meta charset="UTF-8">
-                <title>Registru Tratamente</title>
+                <title>${raport.textContent}-${titlu.textContent}</title>
                 <style>
                     .table {border - collapse: collapse; width: 100%; }
                     .table, .table th, .table td {border: 1px solid black; }
@@ -19,7 +23,7 @@
                 </style>
         </head>
         <body>
-            <h1>Tratamente Aplicate</h1>
+            <h1>${raport.textContent}-${titlu.textContent}</h1>
             ${table}
         </body>
     </html>`;
@@ -27,7 +31,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
-    a.download = "RegistruTratamente.html";
+    a.download = "Descarcare.html";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

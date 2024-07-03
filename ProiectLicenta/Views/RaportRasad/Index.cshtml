@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <input class="btn btn-primary mb-3" type="submit" value="Generare Raport" />
+        <input class="btn btn-primary mb-3" type="submit" value="Generare Raport" /> <button class="btn btn-secondary mb-3" onclick="downloadTableAsHtml()"><i class="bi bi-file-earmark-arrow-down"></i> Descarca Raport</button>
     </form>
 
     @if (Model != null)
@@ -86,7 +86,7 @@
                 @if (Model.RegistruCopilire != null && Model.RegistruCopilire.Any())
                 {
                     <h4 class="text-center">Registru Copilire</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                                 <th>
@@ -160,7 +160,7 @@
                 @if (Model.RegistruFertilizare != null && Model.RegistruFertilizare.Any())
                 {
                     <h4 class="text-center">Registru Fertilizare</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                                 <th>
@@ -234,7 +234,7 @@
                 @if (Model.RegistruIrigare != null && Model.RegistruIrigare.Any())
                 {
                     <h4 class="text-center">Registru Irigare</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                                 <th>
@@ -308,7 +308,7 @@
                 @if (Model.RegistruPalisare != null && Model.RegistruPalisare.Any())
                 {
                     <h4 class="text-center">Registru Palisare</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                                 <th>
@@ -382,7 +382,7 @@
                 @if (Model.RegistruRecoltare != null && Model.RegistruRecoltare.Any())
                 {
                     <h4 class="text-center">Registru Recoltare</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                                 <th>
@@ -456,7 +456,7 @@
                 @if (Model.RegistruTratamente != null && Model.RegistruTratamente.Any())
                 {
                     <h4 class="text-center">Registru Tratamente</h4>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered"id="registruTable">
                         <thead>
                             <tr>
                             <tr>
