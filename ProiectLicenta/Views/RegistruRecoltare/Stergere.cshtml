@@ -35,6 +35,7 @@
                     <th>
                         Data Recoltare
                     </th>
+                    <th>Sarcina</th>
                 </tr>
                 @foreach (var var in Model)
                 {
@@ -56,6 +57,16 @@
                         </td>
                         <td>
                             @var.DataRecoltare.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @if (var.Stare == false)
+                            {
+                                <i class="bi bi-three-dots"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
                         </td>
                     </tr>
                 }

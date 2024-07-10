@@ -44,18 +44,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruPalisare> datePalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruPalisare> datePalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.NumarPlante == index).ToList(), sortOrder);
                     return View(datePalisare);
                 }
                 else
                 {
-                    List<RegistruPalisare> datePalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruPalisare> datePalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
                     return View(datePalisare);
                 }
             }
-            List<RegistruPalisare> registruPalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).ToList(),sortOrder);
+            List<RegistruPalisare> registruPalisare = SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Stare == true).ToList(),sortOrder);
             return View(registruPalisare);
         }
         [HttpGet]
@@ -76,7 +76,9 @@ namespace ProiectLicenta.Controllers
                     addRegistruPalisareViewModel.CodParcela,
                     addRegistruPalisareViewModel.NumarPlante,
                     addRegistruPalisareViewModel.CodAngajat,
-                    addRegistruPalisareViewModel.DataPalisare
+                    addRegistruPalisareViewModel.DataPalisare,
+                    addRegistruPalisareViewModel.Stare
+
                 );
 
                 context.RegistruPalisare.Add(newRegistruPalisare);

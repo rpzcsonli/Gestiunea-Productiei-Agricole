@@ -16,17 +16,20 @@ namespace ProiectLicenta.Models
         public int CodAngajat { get; set; }
         [Required]
         public DateTime DataCopilire { get; set; }
+        public bool Stare { get; set; }
         public Angajat? Angajat { get; set; }
         public Parcela? Parcela { get; set; }
       
-        public RegistruCopilire(int codCopilire, int codParcela, int numarPlante, int codAngajat, DateTime dataCopilire)
+        public RegistruCopilire(int codCopilire, int codParcela, int numarPlante, int codAngajat, DateTime dataCopilire, bool stare)
         {
             this.CodCopilire = codCopilire;
             this.CodParcela = codParcela;
             this.NumarPlante = numarPlante;
             this.CodAngajat = codAngajat;
             this.DataCopilire = dataCopilire;
+            this.Stare = stare;
+
         }
-       
+
     }
 }

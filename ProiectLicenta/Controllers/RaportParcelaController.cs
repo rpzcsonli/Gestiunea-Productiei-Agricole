@@ -65,25 +65,25 @@ namespace ProiectLicenta.Controllers
                     switch (registruSelectat)
                     {
                         case "RegistruCopilire":
-                            raportParcele.RegistruCopilire.AddRange(SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruCopilire.AddRange(SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
                             break;
                         case "RegistruFertilizare":
-                            raportParcele.RegistruFertilizare.AddRange(SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruFertilizare.AddRange(SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
                             break;
                         case "RegistruIrigare":
-                            raportParcele.RegistruIrigare.AddRange(SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruIrigare.AddRange(SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruPalisare":
-                            raportParcele.RegistruPalisare.AddRange(SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruPalisare.AddRange(SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruRecoltare":
-                            raportParcele.RegistruRecoltare.AddRange(SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruRecoltare.AddRange(SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruTratamente":
-                            raportParcele.RegistruTratamente.AddRange(SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(p => p.CodParcela == parcelaSelectata.Value).ToList(), sortOrder));
+                            raportParcele.RegistruTratamente.AddRange(SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(p => p.CodParcela == parcelaSelectata.Value && p.Stare == true).ToList(), sortOrder));
                             break;
                     }
                 }
@@ -92,25 +92,25 @@ namespace ProiectLicenta.Controllers
                     switch (registruSelectat)
                     {
                         case "RegistruCopilire":
-                            raportParcele.RegistruCopilire.AddRange(SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataCopilire >= dataInceput && p.DataCopilire <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruCopilire.AddRange(SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataCopilire >= dataInceput && p.DataCopilire <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
                             break;
                         case "RegistruFertilizare":
-                            raportParcele.RegistruFertilizare.AddRange(SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataFertilizare >= dataInceput && p.DataFertilizare <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruFertilizare.AddRange(SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataFertilizare >= dataInceput && p.DataFertilizare <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
                             break;
                         case "RegistruIrigare":
-                            raportParcele.RegistruIrigare.AddRange(SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataIrigare >= dataInceput && p.DataIrigare <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruIrigare.AddRange(SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataIrigare >= dataInceput && p.DataIrigare <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruPalisare":
-                            raportParcele.RegistruPalisare.AddRange(SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataPalisare >= dataInceput && p.DataPalisare <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruPalisare.AddRange(SortData(context.RegistruPalisare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataPalisare >= dataInceput && p.DataPalisare <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruRecoltare":
-                            raportParcele.RegistruRecoltare.AddRange(SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataRecoltare >= dataInceput && p.DataRecoltare <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruRecoltare.AddRange(SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataRecoltare >= dataInceput && p.DataRecoltare <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
 
                             break;
                         case "RegistruTratamente":
-                            raportParcele.RegistruTratamente.AddRange(SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataAplicare >= dataInceput && p.DataAplicare <= dataSfarsit).ToList(), sortOrder));
+                            raportParcele.RegistruTratamente.AddRange(SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(p => p.CodParcela == parcelaSelectata.Value && p.DataAplicare >= dataInceput && p.DataAplicare <= dataSfarsit && p.Stare == true).ToList(), sortOrder));
                             break;
                     }
                 }

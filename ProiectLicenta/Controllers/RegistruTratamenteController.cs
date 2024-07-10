@@ -27,18 +27,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString) || a.Suprafata == index).ToList(), sortOrder);
                     return View(datetratamente);
                 }
                 else
                 {
-                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruTratamente> datetratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Daunatori.Denumire.Contains(searchString) || a.Daunatori.Tratament.Denumire.Contains(searchString)).ToList(), sortOrder);
                     return View(datetratamente);
                 }
             }
-            List<RegistruTratamente> registruTratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).ToList(), sortOrder);
+            List<RegistruTratamente> registruTratamente = SortData(context.RegistruTratamente.Include(r => r.Parcela).Include(r => r.Angajat).Include(r => r.Daunatori).ThenInclude(r => r.Tratament).Where(a => a.Stare == true).ToList(), sortOrder);
             return View(registruTratamente);
         }
         public void CheiExterne(AddRegistruTratamenteViewModel intrare)
@@ -85,7 +85,8 @@ namespace ProiectLicenta.Controllers
                     addRegistruTratamenteViewModel.CodDaunator,
                     addRegistruTratamenteViewModel.Suprafata,
                     addRegistruTratamenteViewModel.CodAngajat,
-                    addRegistruTratamenteViewModel.DataAplicare
+                    addRegistruTratamenteViewModel.DataAplicare,
+                    addRegistruTratamenteViewModel.Stare
                 );
 
                 context.RegistruTratamente.Add(newRegistruTratamente);

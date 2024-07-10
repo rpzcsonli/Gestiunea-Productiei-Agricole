@@ -9,7 +9,7 @@ using ProiectLicenta.ViewModels;
 
 namespace ProiectLicenta.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DaunatoriController : Controller
     {
 

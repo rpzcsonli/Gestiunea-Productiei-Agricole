@@ -24,18 +24,18 @@ namespace ProiectLicenta.Controllers
             var totalPlante = context.Parcela.Sum(p => p.NumarPlante);
             var totalAngajati = context.Angajat.Count();
             var totalRasaduri = context.Rasad.Sum(p => p.Cantitate);
-            var totalTratamente = context.RegistruTratamente.Count();
-            var suprafataTratamente = context.RegistruTratamente.Sum(p => p.Suprafata);
-            var totalIrigari = context.RegistruIrigare.Count();
-            var durataIrigari = context.RegistruIrigare.Sum(p => p.DurataIrigare);
-            var totalFertilizari = context.RegistruFertilizare.Count();
-            var suprafataFertilizari = context.RegistruFertilizare.Sum(p => p.Suprafata);
-            var totalPalisari = context.RegistruPalisare.Count();
-            var plantePalisari = context.RegistruPalisare.Sum(p => p.NumarPlante);
-            var totalRecoltari = context.RegistruRecoltare.Count();
-            var cantitateRecoltari = context.RegistruRecoltare.Sum(p => p.CantitateRecoltata);
-            var totalCopiliri = context.RegistruCopilire.Count();
-            var numarCopiliri = context.RegistruCopilire.Sum(p => p.NumarPlante);
+            var totalTratamente = context.RegistruTratamente.Where(a=>a.Stare==true).Count();
+            var suprafataTratamente = context.RegistruTratamente.Where(a => a.Stare == true).Sum(p => p.Suprafata);
+            var totalIrigari = context.RegistruIrigare.Where(a => a.Stare == true).Count();
+            var durataIrigari = context.RegistruIrigare.Where(a => a.Stare == true).Sum(p => p.DurataIrigare);
+            var totalFertilizari = context.RegistruFertilizare.Where(a => a.Stare == true).Count();
+            var suprafataFertilizari = context.RegistruFertilizare.Where(a => a.Stare == true).Sum(p => p.Suprafata);
+            var totalPalisari = context.RegistruPalisare.Where(a => a.Stare == true).Count();
+            var plantePalisari = context.RegistruPalisare.Where(a => a.Stare == true).Sum(p => p.NumarPlante);
+            var totalRecoltari = context.RegistruRecoltare.Where(a => a.Stare == true).Count();
+            var cantitateRecoltari = context.RegistruRecoltare.Where(a => a.Stare == true).Sum(p => p.CantitateRecoltata);
+            var totalCopiliri = context.RegistruCopilire.Where(a => a.Stare == true).Count();
+            var numarCopiliri = context.RegistruCopilire.Where(a => a.Stare == true).Sum(p => p.NumarPlante);
 
             var statisticiViewModel = new StatisticiViewModel
             {

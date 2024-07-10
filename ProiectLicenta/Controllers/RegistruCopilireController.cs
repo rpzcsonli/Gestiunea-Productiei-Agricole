@@ -27,18 +27,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.NumarPlante == index).ToList(), sortOrder);
                     return View(dateCopilire);
                 }
                 else
                 {
-                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruCopilire> dateCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
                     return View(dateCopilire);
                 }
             }
-            List<RegistruCopilire> registruCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).ToList(), sortOrder);
+            List<RegistruCopilire> registruCopilire = SortData(context.RegistruCopilire.Include(r => r.Parcela).Include(r => r.Angajat).Where(a=> a.Stare == true).ToList(), sortOrder);
             return View(registruCopilire);
         }
         public void CheiExterne(AddRegistruCopilireViewModel intrare)
@@ -76,7 +76,9 @@ namespace ProiectLicenta.Controllers
                     addRegistruCopilireViewModel.CodParcela,
                     addRegistruCopilireViewModel.NumarPlante,   
                     addRegistruCopilireViewModel.CodAngajat,
-                    addRegistruCopilireViewModel.DataCopilire
+                    addRegistruCopilireViewModel.DataCopilire,
+                    addRegistruCopilireViewModel.Stare
+                    
                 );
                 context.RegistruCopilire.Add(newRegistruCopilire);
                 context.SaveChanges();

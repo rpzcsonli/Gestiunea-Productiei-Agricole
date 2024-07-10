@@ -28,18 +28,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.CantitateRecoltata == index).ToList(), sortOrder);
                     return View(dateRecoltare);
                 }
                 else
                 {
-                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruRecoltare> dateRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
                     return View(dateRecoltare);
                 }
             }
-            List<RegistruRecoltare> registruRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).Include(r => r.Angajat).ToList(),sortOrder);
+            List<RegistruRecoltare> registruRecoltare = SortData(context.RegistruRecoltare.Include(r => r.Parcela).ThenInclude(r => r.Rasaduri).Include(r => r.Angajat).Where(a => a.Stare == true).ToList(),sortOrder);
             return View(registruRecoltare);
         }
         public void CheiExterne(AddRegistruRecoltareViewModel intrare)
@@ -78,7 +78,8 @@ namespace ProiectLicenta.Controllers
                     addRegistruRecoltareViewModel.CodParcela,
                     addRegistruRecoltareViewModel.CodAngajat,
                     addRegistruRecoltareViewModel.CantitateRecoltata,
-                    addRegistruRecoltareViewModel.DataRecoltare
+                    addRegistruRecoltareViewModel.DataRecoltare,
+                    addRegistruRecoltareViewModel.Stare
                 );
 
                 context.RegistruRecoltare.Add(newRecoltare);

@@ -17,10 +17,11 @@ namespace ProiectLicenta.Models
         public int CodAngajat { get; set; }
         [Required]
         public DateTime DataAplicare { get; set; }
+        public bool Stare { get; set; }
         public Angajat? Angajat { get; set; }
         public Parcela? Parcela { get; set; }
         public Daunatori? Daunatori { get; set; }
-        public RegistruTratamente(int codTratamentAplicat, int codParcela, int codDaunator, int suprafata, int codAngajat, DateTime dataAplicare)
+        public RegistruTratamente(int codTratamentAplicat, int codParcela, int codDaunator, int suprafata, int codAngajat, DateTime dataAplicare,bool stare)
         {
             this.CodTratamentAplicat = codTratamentAplicat;
             this.CodParcela = codParcela;
@@ -28,6 +29,7 @@ namespace ProiectLicenta.Models
             this.Suprafata = suprafata;
             this.CodAngajat = codAngajat;
             this.DataAplicare = dataAplicare;
+            this.Stare = stare;
         }
     }
 }

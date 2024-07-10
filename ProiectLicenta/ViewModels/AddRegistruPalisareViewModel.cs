@@ -18,5 +18,9 @@ namespace ProiectLicenta.ViewModels
         public int CodAngajat { get; set; }
         [Required]
         public DateTime DataPalisare { get; set; }
+        [Required]
+
+        public bool Stare { get; set; }
+
     }
 }

@@ -26,18 +26,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruFertilizare> dateFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruFertilizare> dateFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.Suprafata == index).ToList(), sortOrder);
                     return View(dateFertilizare);
                 }
                 else
                 {
-                    List<RegistruFertilizare> dateFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruFertilizare> dateFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
                     return View(dateFertilizare);
                 }
             }
-            List<RegistruFertilizare> registruFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).ToList(),sortOrder);
+            List<RegistruFertilizare> registruFertilizare = SortData(context.RegistruFertilizare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Stare == true).ToList(),sortOrder);
             return View(registruFertilizare);
         }
         public void CheiExterne(AddRegistruFertilizareViewModel intrare)
@@ -76,7 +76,8 @@ namespace ProiectLicenta.Controllers
                     addRegistruFertilizareViewModel.CodParcela,
                     addRegistruFertilizareViewModel.Suprafata,
                     addRegistruFertilizareViewModel.CodAngajat,
-                    addRegistruFertilizareViewModel.DataFertilizare
+                    addRegistruFertilizareViewModel.DataFertilizare,
+                    addRegistruFertilizareViewModel.Stare
                 );
 
                 context.RegistruFertilizare.Add(newRegistruFertilizare);

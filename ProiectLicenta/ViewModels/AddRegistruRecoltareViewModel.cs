@@ -18,5 +18,9 @@ namespace ProiectLicenta.ViewModels
         public int CantitateRecoltata { get; set; }
         [Required]
         public DateTime DataRecoltare { get; set; }
+        [Required]
+
+        public bool Stare { get; set; }
+
     }
 }

@@ -6,8 +6,6 @@
         var table = document.getElementById("registruTable").outerHTML;
         var titlu = document.querySelector('h1');
         var raport = document.querySelector('h4');
-
-
     var htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -28,7 +26,7 @@
         </body>
     </html>`;
     var blob = new Blob([htmlContent], {type: "text/html" });
-    var url = URL.createObjectURL(blob);
+    var url = URL.createObjectURL(blob);0
     var a = document.createElement("a");
     a.href = url;
     a.download = "Descarcare.html";

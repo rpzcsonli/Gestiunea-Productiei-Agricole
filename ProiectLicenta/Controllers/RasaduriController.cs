@@ -8,7 +8,7 @@ using ProiectLicenta.ViewModels;
 
 namespace ProiectLicenta.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RasaduriController : Controller
     {
         private ApplicationDbContext context;

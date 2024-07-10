@@ -15,15 +15,19 @@ namespace ProiectLicenta.Models
         public int CodAngajat { get; set; }
         [Required]
         public DateTime DataIrigare { get; set; }
+        public bool Stare { get; set; }
+
         public Angajat? Angajat { get; set; }
         public Parcela? Parcela { get; set; }
-        public RegistruIrigare(int codIrigare, int codParcela, int durataIrigare, int codAngajat, DateTime dataIrigare)
+        public RegistruIrigare(int codIrigare, int codParcela, int durataIrigare, int codAngajat, DateTime dataIrigare, bool stare)
         {
             this.CodIrigare = codIrigare;
             this.CodParcela = codParcela;
             this.DurataIrigare = durataIrigare;
             this.CodAngajat = codAngajat;
             this.DataIrigare = dataIrigare;
+            this.Stare = stare;
+
         }
     }
 }

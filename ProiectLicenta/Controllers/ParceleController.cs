@@ -8,7 +8,7 @@ using ProiectLicenta.Models;
 using ProiectLicenta.ViewModels;
 namespace ProiectLicenta.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ParceleController : Controller
     {
         private readonly ApplicationDbContext context;

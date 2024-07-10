@@ -26,18 +26,18 @@ namespace ProiectLicenta.Controllers
             {
                 if (int.TryParse(searchString, out int index))
                 {
-                    List<RegistruIrigare> dateIrigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruIrigare> dateIrigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString) || a.DurataIrigare == index).ToList(), sortOrder);
                     return View(dateIrigare);
                 }
                 else
                 {
-                    List<RegistruIrigare> dateIrigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) ||
+                    List<RegistruIrigare> dateIrigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Parcela.Locatie.Contains(searchString) && a.Stare == true ||
                  a.Angajat.Nume.Contains(searchString) || a.Angajat.Prenume.Contains(searchString)).ToList(), sortOrder);
                     return View(dateIrigare);
                 }
             }
-            List<RegistruIrigare> registruirigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).ToList(),sortOrder);
+            List<RegistruIrigare> registruirigare = SortData(context.RegistruIrigare.Include(r => r.Parcela).Include(r => r.Angajat).Where(a => a.Stare == true).ToList(),sortOrder);
             return View(registruirigare);
         }
         public void CheiExterne(AddRegistruIrigareViewModel intrare)
@@ -76,7 +76,8 @@ namespace ProiectLicenta.Controllers
                     adRegistruIrigareViewModel.CodParcela,
                     adRegistruIrigareViewModel.DurataIrigare,
                     adRegistruIrigareViewModel.CodAngajat,
-                    adRegistruIrigareViewModel.DataIrigare
+                    adRegistruIrigareViewModel.DataIrigare,
+                    adRegistruIrigareViewModel.Stare
                 );
 
                 context.RegistruIrigare.Add(newregistruIrigare);

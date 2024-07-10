@@ -7,7 +7,7 @@ using ProiectLicenta.ViewModels;
 
 namespace ProiectLicenta.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AngajatiController : Controller
     {
         private ApplicationDbContext context;

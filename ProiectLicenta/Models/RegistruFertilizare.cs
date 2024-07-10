@@ -15,17 +15,21 @@ namespace ProiectLicenta.Models
         public int CodAngajat { get; set; }
         [Required]
         public DateTime DataFertilizare { get; set; }
+        public bool Stare { get; set; }
+
         public Angajat? Angajat { get; set; }
         public Parcela? Parcela { get; set; }
         
 
-        public RegistruFertilizare(int codFertilizare, int codParcela, int suprafata, int codAngajat, DateTime dataFertilizare)
+        public RegistruFertilizare(int codFertilizare, int codParcela, int suprafata, int codAngajat, DateTime dataFertilizare, bool stare)
         {
             this.CodFertilizare = codFertilizare;
             this.CodParcela = codParcela;
             this.Suprafata = suprafata;
             this.CodAngajat = codAngajat;
             this.DataFertilizare = dataFertilizare;
+            this.Stare = stare;
+
         }
 
     }
